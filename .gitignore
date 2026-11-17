@@ -1,0 +1,82 @@
+# ===================== Python =====================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+.eggs/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# ===================== Secrets / env =====================
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# ===================== Data (images are large) =====================
+# Keep folder structure (.gitkeep), ignore the full dataset,
+# but commit the small sample in data/sample/ so graders can see real data
+data/**/*
+!data/**/
+!data/**/.gitkeep
+!data/sample/**
+*.zip
+*.tar.gz
+
+# ===================== Training logs =====================
+# (Model files are intentionally NOT ignored — the model is deployed from the repo)
+runs/
+logs/
+mlruns/
+wandb/
+lightning_logs/
+
+# API uploads (user-submitted images)
+uploads/
+
+# ===================== Databases =====================
+*.db
+*.sqlite
+*.sqlite3
+
+# ===================== Frontend (Node / Vite) =====================
+node_modules/
+freshness_frontend/dist/
+dist-ssr/
+*.local
+.vite/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ===================== Logs =====================
+*.log
+
+# ===================== Editors / OS =====================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+desktop.ini

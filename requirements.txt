@@ -1,2 +1,10 @@
 fastapi[standard]
 locust
+huggingface_hub
+pyarrow
+pillow
+tqdm
+opencv-python-headless
+tensorflow
+numpy
+pandas

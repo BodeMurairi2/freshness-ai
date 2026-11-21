@@ -32,12 +32,18 @@ ENV/
 *.key
 
 # ===================== Data (images are large) =====================
-# Keep folder structure (.gitkeep), ignore the full dataset,
-# but commit the small sample in data/sample/ so graders can see real data
+# Ignore everything under data/ (incl. the 2.7 GB full-resolution raw_data/),
+# but commit the train/validation/test split (resized to 512 px, ~106 MB)
+# and the small sample, so the app can be rebuilt and retrained from the repo
 data/**/*
 !data/**/
 !data/**/.gitkeep
 !data/sample/**
+!data/train/**
+!data/validation/**
+!data/test/**
+# ready-to-upload labelled images for testing retraining (scripts/download_samples.py)
+!data/samples/**
 *.zip
 *.tar.gz
 
@@ -49,8 +55,10 @@ mlruns/
 wandb/
 lightning_logs/
 
-# API uploads (user-submitted images)
-uploads/
+# API uploads (user-submitted images): a root-level uploads/ folder, if any.
+# data/uploads/ is handled by the data rules above: its images are ignored,
+# but its 16 class folders (.gitkeep) are committed so a fresh clone has them.
+/uploads/
 
 # ===================== Databases =====================
 *.db
@@ -82,3 +90,10 @@ Thumbs.db
 desktop.ini
 
 raw_data/
+
+# Server state written by the app (model choice, retraining progress)
+models/selected_model.txt
+models/retrain_status.json
+models/*.tmp
+
+push.sh

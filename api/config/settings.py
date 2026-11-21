@@ -20,6 +20,14 @@ class AppSettings(BaseSettings):
     IMAGE_ALLOWED_SIZE:int=10
     DECISION_THRESHOLD:float=0.6
 
+    # Model input size
+    IMAGE_SIZE:tuple[int, int]=(224, 224)
+
+    # Retraining
+    RETRAIN_EPOCHS:int=2
+    RETRAIN_LEARNING_RATE:float=1e-4
+    RETRAIN_MIN_IMAGES:int=10  # uploads needed before retraining can start
+
 @lru_cache(maxsize=128)
 def app_settings() -> AppSettings:
     return AppSettings()

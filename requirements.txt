@@ -1,10 +1,33 @@
-fastapi[standard]
-locust
-huggingface_hub
-pyarrow
-pillow
-tqdm
-opencv-python-headless
-tensorflow
-numpy
-pandas
+# Python 3.13.5 — pinned for reproducibility
+# Install: pip install -r requirements.txt
+
+# --- API ---
+fastapi[standard]==0.163.1
+
+# --- Load testing ---
+locust==2.47.0
+
+# --- Data acquisition ---
+huggingface_hub==2.4.0
+pyarrow==26.0.1
+tqdm==4.70.1
+
+# --- Images ---
+pillow==13.0.0
+opencv-python-headless==5.1.0.95
+
+# --- Modelling ---
+tensorflow==2.21.0
+keras==3.15.1
+h5py==3.14.0
+tensorboard==2.21.0
+tensorboardx==2.6.5
+scikit-learn==1.9.1
+
+# --- Data analysis & visualisation ---
+numpy==2.5.5
+pandas==3.1.1
+matplotlib==3.11.2
+
+# --- Notebook ---
+ipykernel==7.4.0

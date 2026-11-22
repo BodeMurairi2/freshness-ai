@@ -22,13 +22,22 @@ router = APIRouter(
 )
 
 @router.post("/model")
-async def retrain_custom_model(images: list[UploadFile] = File(...),
+async def retrain_custom_model(images: list[UploadFile] = File(
+                                   ...,
+                                   json_schema_extra={"items": {"type": "string", "format": "binary"}},
+                               ),
                                labels: list[str] = Form(...)):
     """
-    Uploads labelled images for retraining, all classes in one request.
-    The frontend repeats each group's class name once per image, e.g.
-    images = [apple1, apple2, banana1], labels = [rotten_apple, rotten_apple, fresh_banana]
+    This function uploads labelled images for retraining, all classes in one request.
+    The frontend repeats each group's class name once per image.
     """
+    labels = [
+        single_label.strip()
+        for label in labels
+        for single_label in label.split(",")
+        if single_label.strip()
+    ]
+
     if len(images) != len(labels):
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
@@ -64,7 +73,7 @@ async def retrain_custom_model(images: list[UploadFile] = File(...),
 @router.post("/start", status_code=status.HTTP_202_ACCEPTED)
 async def start_retraining(background_tasks: BackgroundTasks):
     """
-    The Retrain button: starts retraining in the background and answers immediately.
+    This function retrain button starts retraining in the background and answers immediately.
     Follow the progress with GET /retrain/status.
     """
     n_uploads = ModelRetrain.count_images(UPLOADS_DIR)
@@ -88,9 +97,7 @@ async def start_retraining(background_tasks: BackgroundTasks):
 @router.get("/status")
 async def retraining_status():
     """
-    Progress of the current (or last) retraining: state, stage, epoch, batch,
-    progress_percent, live metrics, per-epoch validation results, and the
-    before/after evaluation once it is done.
+    This function shows the progress report in each epoch
     """
     return read_status()
 
@@ -103,7 +110,7 @@ async def display_all_models():
 
 @router.post("/models/select")
 async def select_prediction_model(model_name: str = Form(..., description="e.g. freshness-ai.keras")):
-    """Chooses which model is used for predictions. No file is moved."""
+    """This function chooses which model is used for predictions. No file is moved."""
     try:
         return await asyncio.to_thread(ModelRetrain().rollback_previous_model, model_name)
     except FileNotFoundError as error:

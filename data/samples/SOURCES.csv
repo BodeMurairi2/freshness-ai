@@ -1,0 +1,401 @@
+file,class,source,original_id
+fresh_pomegranate/1.jpg,fresh_pomegranate,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row0
+rotten_apple/1.jpg,rotten_apple,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row1
+fresh_pomegranate/2.jpg,fresh_pomegranate,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row2
+rotten_orange/1.jpg,rotten_orange,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row3
+fresh_apple/1.jpg,fresh_apple,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row4
+fresh_pomegranate/3.jpg,fresh_pomegranate,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row5
+rotten_pomegranate/1.jpg,rotten_pomegranate,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row6
+fresh_orange/1.jpg,fresh_orange,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row7
+fresh_apple/2.jpg,fresh_apple,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row8
+rotten_guava/1.jpg,rotten_guava,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row9
+fresh_orange/2.jpg,fresh_orange,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row10
+rotten_pomegranate/2.jpg,rotten_pomegranate,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row11
+fresh_pomegranate/4.jpg,fresh_pomegranate,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row12
+fresh_pomegranate/5.jpg,fresh_pomegranate,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row13
+fresh_pomegranate/6.jpg,fresh_pomegranate,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row14
+rotten_orange/2.jpg,rotten_orange,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row17
+fresh_apple/3.jpg,fresh_apple,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row18
+rotten_banana/1.jpg,rotten_banana,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row19
+rotten_banana/2.jpg,rotten_banana,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row20
+rotten_pomegranate/3.jpg,rotten_pomegranate,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row23
+fresh_orange/3.jpg,fresh_orange,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row25
+rotten_banana/3.jpg,rotten_banana,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row26
+rotten_guava/2.jpg,rotten_guava,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row27
+fresh_pomegranate/7.jpg,fresh_pomegranate,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row30
+fresh_guava/1.jpg,fresh_guava,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row31
+fresh_pomegranate/8.jpg,fresh_pomegranate,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row32
+fresh_banana/1.jpg,fresh_banana,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row33
+rotten_pomegranate/4.jpg,rotten_pomegranate,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row34
+fresh_apple/4.jpg,fresh_apple,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row35
+fresh_orange/4.jpg,fresh_orange,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row37
+rotten_pomegranate/5.jpg,rotten_pomegranate,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row38
+fresh_pomegranate/9.jpg,fresh_pomegranate,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row39
+fresh_pomegranate/10.jpg,fresh_pomegranate,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row40
+rotten_banana/4.jpg,rotten_banana,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row42
+fresh_apple/5.jpg,fresh_apple,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row43
+rotten_guava/3.jpg,rotten_guava,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row44
+fresh_banana/2.jpg,fresh_banana,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row47
+fresh_pomegranate/11.jpg,fresh_pomegranate,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row48
+fresh_pomegranate/12.jpg,fresh_pomegranate,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row49
+rotten_banana/5.jpg,rotten_banana,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row50
+rotten_orange/3.jpg,rotten_orange,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row53
+fresh_pomegranate/13.jpg,fresh_pomegranate,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row54
+fresh_pomegranate/14.jpg,fresh_pomegranate,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row55
+fresh_pomegranate/15.jpg,fresh_pomegranate,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row56
+rotten_pomegranate/6.jpg,rotten_pomegranate,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row58
+fresh_orange/5.jpg,fresh_orange,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row59
+rotten_pomegranate/7.jpg,rotten_pomegranate,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row62
+fresh_banana/3.jpg,fresh_banana,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row63
+fresh_guava/2.jpg,fresh_guava,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row64
+fresh_pomegranate/16.jpg,fresh_pomegranate,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row65
+rotten_apple/2.jpg,rotten_apple,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row66
+rotten_apple/3.jpg,rotten_apple,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row67
+fresh_pomegranate/17.jpg,fresh_pomegranate,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row69
+fresh_pomegranate/18.jpg,fresh_pomegranate,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row70
+fresh_pomegranate/19.jpg,fresh_pomegranate,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row71
+rotten_banana/6.jpg,rotten_banana,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row72
+fresh_apple/6.jpg,fresh_apple,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row74
+rotten_pomegranate/8.jpg,rotten_pomegranate,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row75
+fresh_pomegranate/20.jpg,fresh_pomegranate,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row76
+fresh_apple/7.jpg,fresh_apple,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row77
+fresh_pomegranate/21.jpg,fresh_pomegranate,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row79
+rotten_apple/4.jpg,rotten_apple,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row80
+fresh_apple/8.jpg,fresh_apple,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row81
+rotten_guava/4.jpg,rotten_guava,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row82
+fresh_banana/4.jpg,fresh_banana,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row83
+fresh_pomegranate/22.jpg,fresh_pomegranate,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row84
+fresh_banana/5.jpg,fresh_banana,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row85
+fresh_pomegranate/23.jpg,fresh_pomegranate,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row86
+fresh_pomegranate/24.jpg,fresh_pomegranate,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row87
+fresh_apple/9.jpg,fresh_apple,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row88
+fresh_pomegranate/25.jpg,fresh_pomegranate,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row90
+fresh_apple/10.jpg,fresh_apple,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row92
+fresh_banana/6.jpg,fresh_banana,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row93
+fresh_banana/7.jpg,fresh_banana,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row94
+fresh_orange/6.jpg,fresh_orange,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row95
+fresh_orange/7.jpg,fresh_orange,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row96
+rotten_orange/4.jpg,rotten_orange,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row101
+fresh_guava/3.jpg,fresh_guava,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row107
+rotten_apple/5.jpg,rotten_apple,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row108
+rotten_banana/7.jpg,rotten_banana,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row113
+fresh_guava/4.jpg,fresh_guava,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row114
+rotten_orange/5.jpg,rotten_orange,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row116
+fresh_banana/8.jpg,fresh_banana,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row117
+rotten_banana/8.jpg,rotten_banana,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row118
+rotten_banana/9.jpg,rotten_banana,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row119
+fresh_banana/9.jpg,fresh_banana,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row120
+fresh_apple/11.jpg,fresh_apple,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row121
+fresh_banana/10.jpg,fresh_banana,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row122
+fresh_orange/8.jpg,fresh_orange,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row127
+rotten_banana/10.jpg,rotten_banana,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row132
+rotten_banana/11.jpg,rotten_banana,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row133
+rotten_apple/6.jpg,rotten_apple,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row134
+rotten_orange/6.jpg,rotten_orange,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row137
+rotten_orange/7.jpg,rotten_orange,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row138
+fresh_banana/11.jpg,fresh_banana,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row141
+fresh_banana/12.jpg,fresh_banana,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row143
+rotten_pomegranate/9.jpg,rotten_pomegranate,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row146
+rotten_apple/7.jpg,rotten_apple,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row148
+fresh_apple/12.jpg,fresh_apple,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row149
+rotten_orange/8.jpg,rotten_orange,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row154
+fresh_guava/5.jpg,fresh_guava,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row156
+fresh_banana/13.jpg,fresh_banana,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row157
+fresh_banana/14.jpg,fresh_banana,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row159
+fresh_orange/9.jpg,fresh_orange,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row161
+rotten_pomegranate/10.jpg,rotten_pomegranate,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row163
+fresh_apple/13.jpg,fresh_apple,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row164
+rotten_pomegranate/11.jpg,rotten_pomegranate,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row165
+fresh_guava/6.jpg,fresh_guava,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row166
+fresh_banana/15.jpg,fresh_banana,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row167
+rotten_guava/5.jpg,rotten_guava,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row169
+rotten_pomegranate/12.jpg,rotten_pomegranate,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row171
+fresh_apple/14.jpg,fresh_apple,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row172
+rotten_orange/9.jpg,rotten_orange,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row173
+rotten_guava/6.jpg,rotten_guava,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row175
+rotten_orange/10.jpg,rotten_orange,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row176
+rotten_pomegranate/13.jpg,rotten_pomegranate,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row178
+rotten_guava/7.jpg,rotten_guava,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row179
+fresh_orange/10.jpg,fresh_orange,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row180
+rotten_pomegranate/14.jpg,rotten_pomegranate,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row183
+fresh_banana/16.jpg,fresh_banana,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row184
+fresh_banana/17.jpg,fresh_banana,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row185
+rotten_pomegranate/15.jpg,rotten_pomegranate,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row186
+fresh_apple/15.jpg,fresh_apple,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row187
+rotten_banana/12.jpg,rotten_banana,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row188
+fresh_banana/18.jpg,fresh_banana,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row189
+rotten_orange/11.jpg,rotten_orange,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row191
+fresh_guava/7.jpg,fresh_guava,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row193
+fresh_orange/11.jpg,fresh_orange,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row194
+rotten_apple/8.jpg,rotten_apple,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row195
+rotten_pomegranate/16.jpg,rotten_pomegranate,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row196
+rotten_guava/8.jpg,rotten_guava,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row201
+fresh_apple/16.jpg,fresh_apple,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row204
+rotten_banana/13.jpg,rotten_banana,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row205
+rotten_banana/14.jpg,rotten_banana,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row206
+fresh_banana/19.jpg,fresh_banana,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row209
+rotten_banana/15.jpg,rotten_banana,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row212
+rotten_guava/9.jpg,rotten_guava,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row214
+rotten_pomegranate/17.jpg,rotten_pomegranate,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row217
+fresh_apple/17.jpg,fresh_apple,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row218
+rotten_orange/12.jpg,rotten_orange,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row219
+rotten_orange/13.jpg,rotten_orange,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row220
+fresh_apple/18.jpg,fresh_apple,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row223
+rotten_pomegranate/18.jpg,rotten_pomegranate,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row224
+rotten_orange/14.jpg,rotten_orange,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row227
+rotten_orange/15.jpg,rotten_orange,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row229
+fresh_apple/19.jpg,fresh_apple,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row231
+rotten_banana/16.jpg,rotten_banana,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row232
+fresh_orange/12.jpg,fresh_orange,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row236
+rotten_orange/16.jpg,rotten_orange,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row237
+rotten_orange/17.jpg,rotten_orange,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row238
+fresh_guava/8.jpg,fresh_guava,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row239
+rotten_pomegranate/19.jpg,rotten_pomegranate,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row247
+fresh_guava/9.jpg,fresh_guava,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row253
+fresh_guava/10.jpg,fresh_guava,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row254
+rotten_guava/10.jpg,rotten_guava,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row255
+fresh_guava/11.jpg,fresh_guava,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row256
+rotten_apple/9.jpg,rotten_apple,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row259
+fresh_apple/20.jpg,fresh_apple,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row260
+fresh_orange/13.jpg,fresh_orange,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row262
+rotten_guava/11.jpg,rotten_guava,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row264
+rotten_banana/17.jpg,rotten_banana,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row267
+rotten_guava/12.jpg,rotten_guava,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row270
+fresh_orange/14.jpg,fresh_orange,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row272
+rotten_apple/10.jpg,rotten_apple,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row273
+rotten_pomegranate/20.jpg,rotten_pomegranate,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row274
+fresh_orange/15.jpg,fresh_orange,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row275
+rotten_pomegranate/21.jpg,rotten_pomegranate,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row277
+fresh_apple/21.jpg,fresh_apple,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row278
+rotten_guava/13.jpg,rotten_guava,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row279
+rotten_guava/14.jpg,rotten_guava,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row280
+fresh_banana/20.jpg,fresh_banana,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row282
+rotten_banana/18.jpg,rotten_banana,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row283
+fresh_apple/22.jpg,fresh_apple,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row284
+fresh_orange/16.jpg,fresh_orange,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row285
+fresh_apple/23.jpg,fresh_apple,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row286
+rotten_guava/15.jpg,rotten_guava,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row289
+rotten_banana/19.jpg,rotten_banana,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row292
+fresh_apple/24.jpg,fresh_apple,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row293
+rotten_apple/11.jpg,rotten_apple,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row296
+rotten_banana/20.jpg,rotten_banana,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row297
+fresh_orange/17.jpg,fresh_orange,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row298
+fresh_banana/21.jpg,fresh_banana,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row299
+rotten_guava/16.jpg,rotten_guava,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row300
+fresh_orange/18.jpg,fresh_orange,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row302
+rotten_apple/12.jpg,rotten_apple,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row303
+rotten_banana/21.jpg,rotten_banana,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row307
+fresh_orange/19.jpg,fresh_orange,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row308
+rotten_pomegranate/22.jpg,rotten_pomegranate,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row309
+fresh_apple/25.jpg,fresh_apple,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row310
+fresh_orange/20.jpg,fresh_orange,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row314
+rotten_banana/22.jpg,rotten_banana,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row315
+fresh_banana/22.jpg,fresh_banana,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row322
+fresh_guava/12.jpg,fresh_guava,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row323
+fresh_orange/21.jpg,fresh_orange,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row324
+rotten_banana/23.jpg,rotten_banana,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row328
+rotten_orange/18.jpg,rotten_orange,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row331
+rotten_guava/17.jpg,rotten_guava,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row332
+fresh_guava/13.jpg,fresh_guava,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row334
+fresh_orange/22.jpg,fresh_orange,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row337
+rotten_apple/13.jpg,rotten_apple,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row342
+rotten_guava/18.jpg,rotten_guava,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row343
+rotten_apple/14.jpg,rotten_apple,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row345
+rotten_guava/19.jpg,rotten_guava,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row346
+fresh_orange/23.jpg,fresh_orange,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row347
+fresh_orange/24.jpg,fresh_orange,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row349
+fresh_orange/25.jpg,fresh_orange,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row350
+fresh_banana/23.jpg,fresh_banana,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row353
+rotten_apple/15.jpg,rotten_apple,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row354
+rotten_banana/24.jpg,rotten_banana,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row357
+rotten_pomegranate/23.jpg,rotten_pomegranate,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row358
+rotten_banana/25.jpg,rotten_banana,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row359
+fresh_banana/24.jpg,fresh_banana,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row365
+rotten_orange/19.jpg,rotten_orange,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row368
+rotten_pomegranate/24.jpg,rotten_pomegranate,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row376
+rotten_apple/16.jpg,rotten_apple,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row378
+fresh_banana/25.jpg,fresh_banana,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row383
+rotten_apple/17.jpg,rotten_apple,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row384
+fresh_guava/14.jpg,fresh_guava,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row393
+rotten_guava/20.jpg,rotten_guava,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row394
+rotten_orange/20.jpg,rotten_orange,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row395
+rotten_guava/21.jpg,rotten_guava,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row396
+rotten_apple/18.jpg,rotten_apple,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row404
+fresh_guava/15.jpg,fresh_guava,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row405
+rotten_orange/21.jpg,rotten_orange,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row409
+rotten_orange/22.jpg,rotten_orange,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row412
+rotten_apple/19.jpg,rotten_apple,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row413
+rotten_apple/20.jpg,rotten_apple,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row415
+rotten_guava/22.jpg,rotten_guava,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row419
+rotten_guava/23.jpg,rotten_guava,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row421
+rotten_pomegranate/25.jpg,rotten_pomegranate,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row423
+rotten_guava/24.jpg,rotten_guava,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row429
+rotten_apple/21.jpg,rotten_apple,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row435
+rotten_apple/22.jpg,rotten_apple,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row443
+fresh_guava/16.jpg,fresh_guava,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row446
+rotten_apple/23.jpg,rotten_apple,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row447
+fresh_guava/17.jpg,fresh_guava,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row448
+rotten_guava/25.jpg,rotten_guava,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row450
+fresh_guava/18.jpg,fresh_guava,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row451
+fresh_guava/19.jpg,fresh_guava,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row456
+fresh_guava/20.jpg,fresh_guava,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row461
+rotten_orange/23.jpg,rotten_orange,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row464
+rotten_orange/24.jpg,rotten_orange,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row469
+rotten_apple/24.jpg,rotten_apple,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row475
+rotten_apple/25.jpg,rotten_apple,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row478
+fresh_guava/21.jpg,fresh_guava,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup0-row483
+rotten_orange/25.jpg,rotten_orange,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup1-row0
+fresh_guava/22.jpg,fresh_guava,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup1-row21
+fresh_guava/23.jpg,fresh_guava,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup1-row24
+fresh_guava/24.jpg,fresh_guava,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup1-row30
+fresh_guava/25.jpg,fresh_guava,FruitNet (CC-BY-4.0),data/train-00000-of-00009.parquet#rowgroup1-row100
+fresh_strawberry/1.jpg,fresh_strawberry,FRUIT-16K (CC-BY-SA-4.0),FRUIT-16K.zip/FRUIT-16K/F_Strawberry/688.jpg
+fresh_strawberry/2.jpg,fresh_strawberry,FRUIT-16K (CC-BY-SA-4.0),FRUIT-16K.zip/FRUIT-16K/F_Strawberry/200.jpg
+fresh_strawberry/3.jpg,fresh_strawberry,FRUIT-16K (CC-BY-SA-4.0),FRUIT-16K.zip/FRUIT-16K/F_Strawberry/120.jpg
+fresh_strawberry/4.jpg,fresh_strawberry,FRUIT-16K (CC-BY-SA-4.0),FRUIT-16K.zip/FRUIT-16K/F_Strawberry/782.jpg
+fresh_strawberry/5.jpg,fresh_strawberry,FRUIT-16K (CC-BY-SA-4.0),FRUIT-16K.zip/FRUIT-16K/F_Strawberry/351.jpg
+fresh_strawberry/6.jpg,fresh_strawberry,FRUIT-16K (CC-BY-SA-4.0),FRUIT-16K.zip/FRUIT-16K/F_Strawberry/323.jpg
+fresh_strawberry/7.jpg,fresh_strawberry,FRUIT-16K (CC-BY-SA-4.0),FRUIT-16K.zip/FRUIT-16K/F_Strawberry/303.jpg
+fresh_strawberry/8.jpg,fresh_strawberry,FRUIT-16K (CC-BY-SA-4.0),FRUIT-16K.zip/FRUIT-16K/F_Strawberry/226.jpg
+fresh_strawberry/9.jpg,fresh_strawberry,FRUIT-16K (CC-BY-SA-4.0),FRUIT-16K.zip/FRUIT-16K/F_Strawberry/778.jpg
+fresh_strawberry/10.jpg,fresh_strawberry,FRUIT-16K (CC-BY-SA-4.0),FRUIT-16K.zip/FRUIT-16K/F_Strawberry/192.jpg
+fresh_strawberry/11.jpg,fresh_strawberry,FRUIT-16K (CC-BY-SA-4.0),FRUIT-16K.zip/FRUIT-16K/F_Strawberry/721.jpg
+fresh_strawberry/12.jpg,fresh_strawberry,FRUIT-16K (CC-BY-SA-4.0),FRUIT-16K.zip/FRUIT-16K/F_Strawberry/781.jpg
+fresh_strawberry/13.jpg,fresh_strawberry,FRUIT-16K (CC-BY-SA-4.0),FRUIT-16K.zip/FRUIT-16K/F_Strawberry/920.jpg
+fresh_strawberry/14.jpg,fresh_strawberry,FRUIT-16K (CC-BY-SA-4.0),FRUIT-16K.zip/FRUIT-16K/F_Strawberry/600.jpg
+fresh_strawberry/15.jpg,fresh_strawberry,FRUIT-16K (CC-BY-SA-4.0),FRUIT-16K.zip/FRUIT-16K/F_Strawberry/179.jpg
+fresh_strawberry/16.jpg,fresh_strawberry,FRUIT-16K (CC-BY-SA-4.0),FRUIT-16K.zip/FRUIT-16K/F_Strawberry/642.jpg
+fresh_strawberry/17.jpg,fresh_strawberry,FRUIT-16K (CC-BY-SA-4.0),FRUIT-16K.zip/FRUIT-16K/F_Strawberry/488.jpg
+fresh_strawberry/18.jpg,fresh_strawberry,FRUIT-16K (CC-BY-SA-4.0),FRUIT-16K.zip/FRUIT-16K/F_Strawberry/127.jpg
+fresh_strawberry/19.jpg,fresh_strawberry,FRUIT-16K (CC-BY-SA-4.0),FRUIT-16K.zip/FRUIT-16K/F_Strawberry/125.jpg
+fresh_strawberry/20.jpg,fresh_strawberry,FRUIT-16K (CC-BY-SA-4.0),FRUIT-16K.zip/FRUIT-16K/F_Strawberry/184.jpg
+fresh_strawberry/21.jpg,fresh_strawberry,FRUIT-16K (CC-BY-SA-4.0),FRUIT-16K.zip/FRUIT-16K/F_Strawberry/3.jpg
+fresh_strawberry/22.jpg,fresh_strawberry,FRUIT-16K (CC-BY-SA-4.0),FRUIT-16K.zip/FRUIT-16K/F_Strawberry/312.jpg
+fresh_strawberry/23.jpg,fresh_strawberry,FRUIT-16K (CC-BY-SA-4.0),FRUIT-16K.zip/FRUIT-16K/F_Strawberry/564.jpg
+fresh_strawberry/24.jpg,fresh_strawberry,FRUIT-16K (CC-BY-SA-4.0),FRUIT-16K.zip/FRUIT-16K/F_Strawberry/653.jpg
+fresh_strawberry/25.jpg,fresh_strawberry,FRUIT-16K (CC-BY-SA-4.0),FRUIT-16K.zip/FRUIT-16K/F_Strawberry/122.jpg
+rotten_strawberry/1.jpg,rotten_strawberry,FRUIT-16K (CC-BY-SA-4.0),FRUIT-16K.zip/FRUIT-16K/S_Strawberry/188.jpg
+rotten_strawberry/2.jpg,rotten_strawberry,FRUIT-16K (CC-BY-SA-4.0),FRUIT-16K.zip/FRUIT-16K/S_Strawberry/429.jpg
+rotten_strawberry/3.jpg,rotten_strawberry,FRUIT-16K (CC-BY-SA-4.0),FRUIT-16K.zip/FRUIT-16K/S_Strawberry/88.jpg
+rotten_strawberry/4.jpg,rotten_strawberry,FRUIT-16K (CC-BY-SA-4.0),FRUIT-16K.zip/FRUIT-16K/S_Strawberry/415.jpg
+rotten_strawberry/5.jpg,rotten_strawberry,FRUIT-16K (CC-BY-SA-4.0),FRUIT-16K.zip/FRUIT-16K/S_Strawberry/655.jpg
+rotten_strawberry/6.jpg,rotten_strawberry,FRUIT-16K (CC-BY-SA-4.0),FRUIT-16K.zip/FRUIT-16K/S_Strawberry/341.jpg
+rotten_strawberry/7.jpg,rotten_strawberry,FRUIT-16K (CC-BY-SA-4.0),FRUIT-16K.zip/FRUIT-16K/S_Strawberry/842.jpg
+rotten_strawberry/8.jpg,rotten_strawberry,FRUIT-16K (CC-BY-SA-4.0),FRUIT-16K.zip/FRUIT-16K/S_Strawberry/138.jpg
+rotten_strawberry/9.jpg,rotten_strawberry,FRUIT-16K (CC-BY-SA-4.0),FRUIT-16K.zip/FRUIT-16K/S_Strawberry/771.jpg
+rotten_strawberry/10.jpg,rotten_strawberry,FRUIT-16K (CC-BY-SA-4.0),FRUIT-16K.zip/FRUIT-16K/S_Strawberry/521.jpg
+rotten_strawberry/11.jpg,rotten_strawberry,FRUIT-16K (CC-BY-SA-4.0),FRUIT-16K.zip/FRUIT-16K/S_Strawberry/593.jpg
+rotten_strawberry/12.jpg,rotten_strawberry,FRUIT-16K (CC-BY-SA-4.0),FRUIT-16K.zip/FRUIT-16K/S_Strawberry/212.jpg
+rotten_strawberry/13.jpg,rotten_strawberry,FRUIT-16K (CC-BY-SA-4.0),FRUIT-16K.zip/FRUIT-16K/S_Strawberry/996.jpg
+rotten_strawberry/14.jpg,rotten_strawberry,FRUIT-16K (CC-BY-SA-4.0),FRUIT-16K.zip/FRUIT-16K/S_Strawberry/949.jpg
+rotten_strawberry/15.jpg,rotten_strawberry,FRUIT-16K (CC-BY-SA-4.0),FRUIT-16K.zip/FRUIT-16K/S_Strawberry/447.jpg
+rotten_strawberry/16.jpg,rotten_strawberry,FRUIT-16K (CC-BY-SA-4.0),FRUIT-16K.zip/FRUIT-16K/S_Strawberry/170.jpg
+rotten_strawberry/17.jpg,rotten_strawberry,FRUIT-16K (CC-BY-SA-4.0),FRUIT-16K.zip/FRUIT-16K/S_Strawberry/607.jpg
+rotten_strawberry/18.jpg,rotten_strawberry,FRUIT-16K (CC-BY-SA-4.0),FRUIT-16K.zip/FRUIT-16K/S_Strawberry/369.jpg
+rotten_strawberry/19.jpg,rotten_strawberry,FRUIT-16K (CC-BY-SA-4.0),FRUIT-16K.zip/FRUIT-16K/S_Strawberry/863.jpg
+rotten_strawberry/20.jpg,rotten_strawberry,FRUIT-16K (CC-BY-SA-4.0),FRUIT-16K.zip/FRUIT-16K/S_Strawberry/678.jpg
+rotten_strawberry/21.jpg,rotten_strawberry,FRUIT-16K (CC-BY-SA-4.0),FRUIT-16K.zip/FRUIT-16K/S_Strawberry/669.jpg
+rotten_strawberry/22.jpg,rotten_strawberry,FRUIT-16K (CC-BY-SA-4.0),FRUIT-16K.zip/FRUIT-16K/S_Strawberry/914.jpg
+rotten_strawberry/23.jpg,rotten_strawberry,FRUIT-16K (CC-BY-SA-4.0),FRUIT-16K.zip/FRUIT-16K/S_Strawberry/893.jpg
+rotten_strawberry/24.jpg,rotten_strawberry,FRUIT-16K (CC-BY-SA-4.0),FRUIT-16K.zip/FRUIT-16K/S_Strawberry/431.jpg
+rotten_strawberry/25.jpg,rotten_strawberry,FRUIT-16K (CC-BY-SA-4.0),FRUIT-16K.zip/FRUIT-16K/S_Strawberry/630.jpg
+rotten_jujube/1.jpg,rotten_jujube,Jujube bruise classification (CC-BY-4.0),raw/train-00000-of-00001.parquet:bruise_258.jpg
+fresh_jujube/1.jpg,fresh_jujube,Jujube bruise classification (CC-BY-4.0),raw/train-00000-of-00001.parquet:healthy_581.jpg
+rotten_jujube/2.jpg,rotten_jujube,Jujube bruise classification (CC-BY-4.0),raw/train-00000-of-00001.parquet:bruise_518.jpg
+fresh_jujube/2.jpg,fresh_jujube,Jujube bruise classification (CC-BY-4.0),raw/train-00000-of-00001.parquet:healthy_384.jpg
+fresh_jujube/3.jpg,fresh_jujube,Jujube bruise classification (CC-BY-4.0),raw/train-00000-of-00001.parquet:healthy_254.jpg
+fresh_jujube/4.jpg,fresh_jujube,Jujube bruise classification (CC-BY-4.0),raw/train-00000-of-00001.parquet:healthy_12.jpg
+fresh_jujube/5.jpg,fresh_jujube,Jujube bruise classification (CC-BY-4.0),raw/train-00000-of-00001.parquet:healthy_575.jpg
+fresh_jujube/6.jpg,fresh_jujube,Jujube bruise classification (CC-BY-4.0),raw/train-00000-of-00001.parquet:healthy_567.jpg
+fresh_jujube/7.jpg,fresh_jujube,Jujube bruise classification (CC-BY-4.0),raw/train-00000-of-00001.parquet:healthy_469.jpg
+rotten_jujube/3.jpg,rotten_jujube,Jujube bruise classification (CC-BY-4.0),raw/train-00000-of-00001.parquet:bruise_712.jpg
+rotten_jujube/4.jpg,rotten_jujube,Jujube bruise classification (CC-BY-4.0),raw/train-00000-of-00001.parquet:bruise_206.jpg
+fresh_jujube/8.jpg,fresh_jujube,Jujube bruise classification (CC-BY-4.0),raw/train-00000-of-00001.parquet:healthy_608.jpg
+rotten_jujube/5.jpg,rotten_jujube,Jujube bruise classification (CC-BY-4.0),raw/train-00000-of-00001.parquet:bruise_351.jpg
+fresh_jujube/9.jpg,fresh_jujube,Jujube bruise classification (CC-BY-4.0),raw/train-00000-of-00001.parquet:healthy_356.jpg
+fresh_jujube/10.jpg,fresh_jujube,Jujube bruise classification (CC-BY-4.0),raw/train-00000-of-00001.parquet:healthy_523.jpg
+rotten_jujube/6.jpg,rotten_jujube,Jujube bruise classification (CC-BY-4.0),raw/train-00000-of-00001.parquet:bruise_115.jpg
+fresh_jujube/11.jpg,fresh_jujube,Jujube bruise classification (CC-BY-4.0),raw/train-00000-of-00001.parquet:healthy_527.jpg
+fresh_jujube/12.jpg,fresh_jujube,Jujube bruise classification (CC-BY-4.0),raw/train-00000-of-00001.parquet:healthy_83.jpg
+rotten_jujube/7.jpg,rotten_jujube,Jujube bruise classification (CC-BY-4.0),raw/train-00000-of-00001.parquet:bruise_500.jpg
+rotten_jujube/8.jpg,rotten_jujube,Jujube bruise classification (CC-BY-4.0),raw/train-00000-of-00001.parquet:bruise_389.jpg
+rotten_jujube/9.jpg,rotten_jujube,Jujube bruise classification (CC-BY-4.0),raw/train-00000-of-00001.parquet:bruise_95.jpg
+rotten_jujube/10.jpg,rotten_jujube,Jujube bruise classification (CC-BY-4.0),raw/train-00000-of-00001.parquet:bruise_460.jpg
+rotten_jujube/11.jpg,rotten_jujube,Jujube bruise classification (CC-BY-4.0),raw/train-00000-of-00001.parquet:bruise_479.jpg
+rotten_jujube/12.jpg,rotten_jujube,Jujube bruise classification (CC-BY-4.0),raw/train-00000-of-00001.parquet:bruise_39.jpg
+rotten_jujube/13.jpg,rotten_jujube,Jujube bruise classification (CC-BY-4.0),raw/train-00000-of-00001.parquet:bruise_282.jpg
+fresh_jujube/13.jpg,fresh_jujube,Jujube bruise classification (CC-BY-4.0),raw/train-00000-of-00001.parquet:healthy_327.jpg
+rotten_jujube/14.jpg,rotten_jujube,Jujube bruise classification (CC-BY-4.0),raw/train-00000-of-00001.parquet:bruise_78.jpg
+rotten_jujube/15.jpg,rotten_jujube,Jujube bruise classification (CC-BY-4.0),raw/train-00000-of-00001.parquet:bruise_232.jpg
+fresh_jujube/14.jpg,fresh_jujube,Jujube bruise classification (CC-BY-4.0),raw/train-00000-of-00001.parquet:healthy_716.jpg
+rotten_jujube/16.jpg,rotten_jujube,Jujube bruise classification (CC-BY-4.0),raw/train-00000-of-00001.parquet:bruise_77.jpg
+fresh_jujube/15.jpg,fresh_jujube,Jujube bruise classification (CC-BY-4.0),raw/train-00000-of-00001.parquet:healthy_649.jpg
+fresh_jujube/16.jpg,fresh_jujube,Jujube bruise classification (CC-BY-4.0),raw/train-00000-of-00001.parquet:healthy_304.jpg
+rotten_jujube/17.jpg,rotten_jujube,Jujube bruise classification (CC-BY-4.0),raw/train-00000-of-00001.parquet:bruise_263.jpg
+fresh_jujube/17.jpg,fresh_jujube,Jujube bruise classification (CC-BY-4.0),raw/train-00000-of-00001.parquet:healthy_597.jpg
+rotten_jujube/18.jpg,rotten_jujube,Jujube bruise classification (CC-BY-4.0),raw/train-00000-of-00001.parquet:bruise_264.jpg
+rotten_jujube/19.jpg,rotten_jujube,Jujube bruise classification (CC-BY-4.0),raw/train-00000-of-00001.parquet:bruise_242.jpg
+rotten_jujube/20.jpg,rotten_jujube,Jujube bruise classification (CC-BY-4.0),raw/train-00000-of-00001.parquet:bruise_568.jpg
+rotten_jujube/21.jpg,rotten_jujube,Jujube bruise classification (CC-BY-4.0),raw/train-00000-of-00001.parquet:bruise_111.jpg
+fresh_jujube/18.jpg,fresh_jujube,Jujube bruise classification (CC-BY-4.0),raw/train-00000-of-00001.parquet:healthy_343.jpg
+rotten_jujube/22.jpg,rotten_jujube,Jujube bruise classification (CC-BY-4.0),raw/train-00000-of-00001.parquet:bruise_219.jpg
+fresh_jujube/19.jpg,fresh_jujube,Jujube bruise classification (CC-BY-4.0),raw/train-00000-of-00001.parquet:healthy_700.jpg
+fresh_jujube/20.jpg,fresh_jujube,Jujube bruise classification (CC-BY-4.0),raw/train-00000-of-00001.parquet:healthy_531.jpg
+rotten_jujube/23.jpg,rotten_jujube,Jujube bruise classification (CC-BY-4.0),raw/train-00000-of-00001.parquet:bruise_656.jpg
+rotten_jujube/24.jpg,rotten_jujube,Jujube bruise classification (CC-BY-4.0),raw/train-00000-of-00001.parquet:bruise_403.jpg
+rotten_jujube/25.jpg,rotten_jujube,Jujube bruise classification (CC-BY-4.0),raw/train-00000-of-00001.parquet:bruise_599.jpg
+fresh_jujube/21.jpg,fresh_jujube,Jujube bruise classification (CC-BY-4.0),raw/train-00000-of-00001.parquet:healthy_628.jpg
+fresh_jujube/22.jpg,fresh_jujube,Jujube bruise classification (CC-BY-4.0),raw/train-00000-of-00001.parquet:healthy_13.jpg
+fresh_jujube/23.jpg,fresh_jujube,Jujube bruise classification (CC-BY-4.0),raw/train-00000-of-00001.parquet:healthy_421.jpg
+fresh_jujube/24.jpg,fresh_jujube,Jujube bruise classification (CC-BY-4.0),raw/train-00000-of-00001.parquet:healthy_145.jpg
+fresh_jujube/25.jpg,fresh_jujube,Jujube bruise classification (CC-BY-4.0),raw/train-00000-of-00001.parquet:healthy_239.jpg
+fresh_grape/1.jpg,fresh_grape,Copy of data/train (grape: no public source),data/train/fresh_grape/00449_FreshGrape (142).jpg
+fresh_grape/2.jpg,fresh_grape,Copy of data/train (grape: no public source),data/train/fresh_grape/00413_FreshGrape (11).jpg
+fresh_grape/3.jpg,fresh_grape,Copy of data/train (grape: no public source),data/train/fresh_grape/00519_FreshGrape (25).jpg
+fresh_grape/4.jpg,fresh_grape,Copy of data/train (grape: no public source),data/train/fresh_grape/00455_FreshGrape (148).jpg
+fresh_grape/5.jpg,fresh_grape,Copy of data/train (grape: no public source),data/train/fresh_grape/00600_FreshGrape (99).jpg
+fresh_grape/6.jpg,fresh_grape,Copy of data/train (grape: no public source),data/train/fresh_grape/00430_FreshGrape (125).jpg
+fresh_grape/7.jpg,fresh_grape,Copy of data/train (grape: no public source),data/train/fresh_grape/00549_FreshGrape (52).jpg
+fresh_grape/8.jpg,fresh_grape,Copy of data/train (grape: no public source),data/train/fresh_grape/00422_FreshGrape (118).jpg
+fresh_grape/9.jpg,fresh_grape,Copy of data/train (grape: no public source),data/train/fresh_grape/00538_FreshGrape (42).jpg
+fresh_grape/10.jpg,fresh_grape,Copy of data/train (grape: no public source),data/train/fresh_grape/00594_FreshGrape (93).jpg
+fresh_grape/11.jpg,fresh_grape,Copy of data/train (grape: no public source),data/train/fresh_grape/00580_FreshGrape (80).jpg
+fresh_grape/12.jpg,fresh_grape,Copy of data/train (grape: no public source),data/train/fresh_grape/00517_FreshGrape (23).jpg
+fresh_grape/13.jpg,fresh_grape,Copy of data/train (grape: no public source),data/train/fresh_grape/00419_FreshGrape (115).jpg
+fresh_grape/14.jpg,fresh_grape,Copy of data/train (grape: no public source),data/train/fresh_grape/00525_FreshGrape (30).jpg
+fresh_grape/15.jpg,fresh_grape,Copy of data/train (grape: no public source),data/train/fresh_grape/00489_FreshGrape (179).jpg
+fresh_grape/16.jpg,fresh_grape,Copy of data/train (grape: no public source),data/train/fresh_grape/00408_FreshGrape (105).jpg
+fresh_grape/17.jpg,fresh_grape,Copy of data/train (grape: no public source),data/train/fresh_grape/00406_FreshGrape (103).jpg
+fresh_grape/18.jpg,fresh_grape,Copy of data/train (grape: no public source),data/train/fresh_grape/00587_FreshGrape (87).jpg
+fresh_grape/19.jpg,fresh_grape,Copy of data/train (grape: no public source),data/train/fresh_grape/00448_FreshGrape (141).jpg
+fresh_grape/20.jpg,fresh_grape,Copy of data/train (grape: no public source),data/train/fresh_grape/00451_FreshGrape (144).jpg
+fresh_grape/21.jpg,fresh_grape,Copy of data/train (grape: no public source),data/train/fresh_grape/00508_FreshGrape (196).jpg
+fresh_grape/22.jpg,fresh_grape,Copy of data/train (grape: no public source),data/train/fresh_grape/00528_FreshGrape (33).jpg
+fresh_grape/23.jpg,fresh_grape,Copy of data/train (grape: no public source),data/train/fresh_grape/00579_FreshGrape (8).jpg
+fresh_grape/24.jpg,fresh_grape,Copy of data/train (grape: no public source),data/train/fresh_grape/00520_FreshGrape (26).jpg
+fresh_grape/25.jpg,fresh_grape,Copy of data/train (grape: no public source),data/train/fresh_grape/00445_FreshGrape (139).jpg
+rotten_grape/1.jpg,rotten_grape,Copy of data/train (grape: no public source),data/train/rotten_grape/02164_RottenGrape (66).jpg
+rotten_grape/2.jpg,rotten_grape,Copy of data/train (grape: no public source),data/train/rotten_grape/02081_RottenGrape (171).jpg
+rotten_grape/3.jpg,rotten_grape,Copy of data/train (grape: no public source),data/train/rotten_grape/02174_RottenGrape (75).jpg
+rotten_grape/4.jpg,rotten_grape,Copy of data/train (grape: no public source),data/train/rotten_grape/02121_RottenGrape (27).jpg
+rotten_grape/5.jpg,rotten_grape,Copy of data/train (grape: no public source),data/train/rotten_grape/02054_RottenGrape (147).jpg
+rotten_grape/6.jpg,rotten_grape,Copy of data/train (grape: no public source),data/train/rotten_grape/02159_RottenGrape (61).jpg
+rotten_grape/7.jpg,rotten_grape,Copy of data/train (grape: no public source),data/train/rotten_grape/02171_RottenGrape (72).jpg
+rotten_grape/8.jpg,rotten_grape,Copy of data/train (grape: no public source),data/train/rotten_grape/02001_RottenGrape (1).jpg
+rotten_grape/9.jpg,rotten_grape,Copy of data/train (grape: no public source),data/train/rotten_grape/02149_RottenGrape (52).jpg
+rotten_grape/10.jpg,rotten_grape,Copy of data/train (grape: no public source),data/train/rotten_grape/02190_RottenGrape (9).jpg
+rotten_grape/11.jpg,rotten_grape,Copy of data/train (grape: no public source),data/train/rotten_grape/02030_RottenGrape (125).jpg
+rotten_grape/12.jpg,rotten_grape,Copy of data/train (grape: no public source),data/train/rotten_grape/02138_RottenGrape (42).jpg
+rotten_grape/13.jpg,rotten_grape,Copy of data/train (grape: no public source),data/train/rotten_grape/02078_RottenGrape (169).jpg
+rotten_grape/14.jpg,rotten_grape,Copy of data/train (grape: no public source),data/train/rotten_grape/02063_RottenGrape (155).jpg
+rotten_grape/15.jpg,rotten_grape,Copy of data/train (grape: no public source),data/train/rotten_grape/02194_RottenGrape (93).jpg
+rotten_grape/16.jpg,rotten_grape,Copy of data/train (grape: no public source),data/train/rotten_grape/02029_RottenGrape (124).jpg
+rotten_grape/17.jpg,rotten_grape,Copy of data/train (grape: no public source),data/train/rotten_grape/02044_RottenGrape (138).jpg
+rotten_grape/18.jpg,rotten_grape,Copy of data/train (grape: no public source),data/train/rotten_grape/02184_RottenGrape (84).jpg
+rotten_grape/19.jpg,rotten_grape,Copy of data/train (grape: no public source),data/train/rotten_grape/02177_RottenGrape (78).jpg
+rotten_grape/20.jpg,rotten_grape,Copy of data/train (grape: no public source),data/train/rotten_grape/02019_RottenGrape (115).jpg
+rotten_grape/21.jpg,rotten_grape,Copy of data/train (grape: no public source),data/train/rotten_grape/02016_RottenGrape (112).jpg
+rotten_grape/22.jpg,rotten_grape,Copy of data/train (grape: no public source),data/train/rotten_grape/02068_RottenGrape (16).jpg
+rotten_grape/23.jpg,rotten_grape,Copy of data/train (grape: no public source),data/train/rotten_grape/02017_RottenGrape (113).jpg
+rotten_grape/24.jpg,rotten_grape,Copy of data/train (grape: no public source),data/train/rotten_grape/02065_RottenGrape (157).jpg
+rotten_grape/25.jpg,rotten_grape,Copy of data/train (grape: no public source),data/train/rotten_grape/02064_RottenGrape (156).jpg

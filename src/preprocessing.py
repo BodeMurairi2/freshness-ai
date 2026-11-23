@@ -16,13 +16,23 @@ class ImageProcessing:
     def __init__(self):
         pass
 
+    def load_image(self, file) -> Image.Image:
+        """
+        Opens an image upright, in RGB, with its longest side reduced to 512 px
+        (the same path the training images took)
+        """
+        opened_image = ImageOps.exif_transpose(Image.open(file)).convert("RGB")
+        opened_image.thumbnail((STORAGE_MAX_SIDE, STORAGE_MAX_SIDE), Image.Resampling.LANCZOS)
+        return opened_image
+
+    def to_model_input(self, image: Image.Image, image_size=IMAGE_SIZE):
+        return tf.image.resize(np.array(image), image_size)
+
     def process_image(self, file, image_size=IMAGE_SIZE):
         """
         This function opens and resize the file to match mobilenetv2
         """
-        opened_image = ImageOps.exif_transpose(Image.open(file)).convert("RGB")
-        resize_image = tf.image.resize(np.array(opened_image), image_size)
-        return resize_image
+        return self.to_model_input(self.load_image(file), image_size)
 
     def prepare_for_storage(self, file) -> bytes:
         """

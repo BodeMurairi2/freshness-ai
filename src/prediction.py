@@ -14,9 +14,9 @@ class Prediction:
         self.img_processing = img_processor
         self.model_name = model_name  # shown in every response, so a model switch is visible
 
-    def classify_image(self, image):
+    def predict_top_class(self, image) -> tuple[str, float]:
         """
-        This function predicts and classify a unseen image
+        This function returns the most likely class and its probability
         """
         image_size = tuple(settings.IMAGE_SIZE)
         model_size = tuple(self.model.input_shape[1:3])  # (height, width) the loaded model was built for
@@ -30,8 +30,12 @@ class Prediction:
         prediction = self.model(image_ext, training=False)
         get_arg_max = int(np.argmax(prediction[0]))
         highest_prob = float(np.max(prediction[0]))
-        get_class = CLASS_NAMES[get_arg_max]
+        return CLASS_NAMES[get_arg_max], highest_prob
 
+    def build_answer(self, get_class: str, highest_prob: float) -> dict:
+        """
+        This function turns a prediction into the answer shown to the user
+        """
         if highest_prob < settings.DECISION_THRESHOLD:
             supported_classes = [
                 classes.split("_")[1].upper()
@@ -51,6 +55,12 @@ class Prediction:
             "confidence": f"{highest_prob*100:.2f}%",
             "model": self.model_name
         }
+
+    def classify_image(self, image):
+        """
+        This function predicts and classify a unseen image
+        """
+        return self.build_answer(*self.predict_top_class(image))
 
 def classify_image():
     model_path = get_selected_model_path()  # the model the user chose (latest by default)

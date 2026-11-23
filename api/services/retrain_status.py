@@ -1,83 +1,80 @@
 """
-Stores the progress of the background retraining so the frontend can poll it.
-
-For now the status lives in models/retrain_status.json. Everything else only uses the
-functions below, so moving to MongoDB later means rewriting this file only.
+Retraining progress, one document per run in the retraining_runs collection.
+The frontend polls the latest run with GET /retrain/status.
 """
-import json
-import threading
-from datetime import datetime, timezone
-from pathlib import Path
+from datetime import datetime, timedelta, timezone
 
-STATUS_FILE = Path(__file__).resolve().parents[2] / "models" / "retrain_status.json"
+from bson import ObjectId
+from pymongo.asynchronous.database import AsyncDatabase
+from pymongo.errors import DuplicateKeyError
 
-# A "running" status that has not been updated for this long is treated as stuck
-# (e.g. the server restarted in the middle of a retraining), so a new run can start.
-STALE_AFTER_SECONDS = 10 * 60
+from api.database.connection import mongo
 
-status_lock = threading.Lock()  # one writer at a time inside this process
+RETRAINING_RUNS = "retraining_runs"
 
-
-def current_time() -> str:
-    """Current UTC time as text, e.g. 2026-11-21T14:05:09+00:00"""
-    return datetime.now(timezone.utc).isoformat(timespec="seconds")
+STALE_AFTER = timedelta(minutes=10)
 
 
-def read_status() -> dict:
-    """The latest retraining status, or {"state": "idle"} if nothing has run yet."""
-    if not STATUS_FILE.exists():
+def current_time() -> datetime:
+    return datetime.now(timezone.utc)
+
+
+def run_as_json(run: dict) -> dict:
+    """Replaces the ObjectId (not JSON friendly) with a run_id string"""
+    run_id = str(run.pop("_id"))
+    return {"run_id": run_id, **run}
+
+
+async def read_status(database: AsyncDatabase) -> dict:
+    """Latest retraining run, or {"state": "idle"} if nothing has run yet"""
+    latest_run = await database[RETRAINING_RUNS].find_one(sort=[("started_at", -1)])
+    if latest_run is None:
         return {"state": "idle"}
+    return run_as_json(latest_run)
+
+
+async def start_run_if_idle(database: AsyncDatabase, total_epochs: int, uploaded_images: int) -> str | None:
+    """
+    This function creates a new run unless one is already running.
+    Returns the run id, or None if a run is in progress.
+    """
+    runs = database[RETRAINING_RUNS]
+    now = current_time()
+
+    await runs.update_many(
+        {"state": "running", "updated_at": {"$lt": now - STALE_AFTER}},
+        {"$set": {
+            "state": "failed",
+            "stage": "failed",
+            "finished_at": now,
+            "error": "No progress for 10 minutes: the server probably restarted during retraining",
+        }},
+    )
+
     try:
-        return json.loads(STATUS_FILE.read_text())
-    except json.JSONDecodeError:
-        return {"state": "idle"}
-
-
-def save_status(status: dict) -> dict:
-    """Writes the whole status through a temporary file, so a reader never sees half a file."""
-    status["updated_at"] = current_time()
-    temporary_status_file = STATUS_FILE.with_suffix(".tmp")
-    temporary_status_file.write_text(json.dumps(status, indent=2))
-    temporary_status_file.replace(STATUS_FILE)
-    return status
-
-
-def write_status(**changes) -> dict:
-    """Updates some fields of the current status, e.g. write_status(stage="training", epoch=1)."""
-    with status_lock:
-        status = read_status()
-        status.update(changes)
-        return save_status(status)
-
-
-def is_stale(status: dict) -> bool:
-    """True if a 'running' status has not been updated for STALE_AFTER_SECONDS."""
-    last_update = status.get("updated_at")
-    if not last_update:
-        return True
-    seconds_since_update = (datetime.now(timezone.utc) - datetime.fromisoformat(last_update)).total_seconds()
-    return seconds_since_update > STALE_AFTER_SECONDS
-
-
-def start_run_if_idle(total_epochs: int) -> bool:
-    """
-    Marks a new retraining run as started, unless one is already running.
-    Check and update happen under the same lock, so two clicks can't start two runs.
-    Returns True if this call started the run.
-    """
-    with status_lock:
-        status = read_status()
-        if status.get("state") == "running" and not is_stale(status):
-            return False
-        save_status({
+        new_run = await runs.insert_one({
             "state": "running",
             "stage": "queued",
-            "started_at": current_time(),
+            "started_at": now,
+            "updated_at": now,
             "finished_at": None,
             "total_epochs": total_epochs,
+            "uploaded_images": uploaded_images,
             "progress_percent": 0,
             "epoch_history": [],
             "result": None,
             "error": None,
         })
-        return True
+    except DuplicateKeyError:
+        return None
+    return str(new_run.inserted_id)
+
+
+def write_status(run_id: str, **changes):
+    """
+    Updates some fields of a run
+    """
+    mongo.sync_database[RETRAINING_RUNS].update_one(
+        {"_id": ObjectId(run_id)},
+        {"$set": {**changes, "updated_at": current_time()}},
+    )

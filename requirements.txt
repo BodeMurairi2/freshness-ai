@@ -1,7 +1,7 @@
 # API
 fastapi[standard]==0.163.1
 python-multipart==0.0.34
-pydantic[standard]
+pydantic[standard]==2.14.3
 
 # Load testing
 locust==2.47.0
@@ -31,3 +31,16 @@ matplotlib==3.11.2
 
 # Notebook
 ipykernel==7.4.0
+
+# Database
+pymongo==4.20.1
+
+# File storage (Cloudflare R2, S3-compatible)
+boto3==1.44.9
+
+# Authentication
+pyjwt==2.15.1
+pwdlib[argon2]==0.4.2
+
+# in-memory database
+redis==8.1.0

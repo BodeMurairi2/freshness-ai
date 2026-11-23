@@ -1,14 +1,31 @@
 import uvicorn
+
 from fastapi import FastAPI
+from contextlib import asynccontextmanager
+
 from api.router import routing
 from api.services.app_description import app_information
+
+from api.database.connection import mongo
+from api.database.indexes import create_indexes
+
+from api.cors_handler.cors_middleware import cors_handler
+@asynccontextmanager
+async def lifespan(app:FastAPI):
+    await mongo.connect()
+    await create_indexes(mongo.database)
+    yield
+    await mongo.close()
 
 app = FastAPI(
     title=app_information["title"],
     summary=app_information["summary"],
     description=app_information["description"],
-    version=app_information["version"]
+    version=app_information["version"],
+    lifespan=lifespan
 )
+
+cors_handler(app=app)
 
 @app.get("/")
 async def welcome():

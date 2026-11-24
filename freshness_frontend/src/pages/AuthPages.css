@@ -1,0 +1,22 @@
+.auth-layout { display: grid; grid-template-columns: minmax(0, 520px) minmax(0, 380px); gap: 28px; justify-content: center; align-items: start; margin-top: 12px; }
+.auth-card { padding: 30px; }
+.auth-title { font-size: clamp(26px, 3vw, 32px); }
+.auth-aside { padding: 26px; border-radius: var(--radius-large); background: linear-gradient(160deg, var(--green-50), var(--surface)); border: 1px solid var(--line); }
+.guideline-icon { width: 40px; height: 40px; border-radius: 12px; background: var(--green-100); color: var(--green-700); display: grid; place-items: center; flex: none; }
+.checklist { margin-top: -10px; display: grid; grid-template-columns: 1fr 1fr; gap: 4px 12px; font-size: 12.5px; font-weight: 500; color: var(--muted); }
+.checklist span { display: inline-flex; align-items: center; gap: 5px; }
+.checklist span.passed { color: var(--green-700); }
+.code-input { font-family: var(--mono); font-size: 24px; letter-spacing: 0.5em; text-align: center; height: 56px; }
+
+@media (max-width: 900px) {
+  .auth-layout { grid-template-columns: minmax(0, 1fr); }
+  .auth-aside { order: 2; }
+}
+@media (max-width: 480px) {
+  .auth-card { padding: 20px; }
+  .checklist { grid-template-columns: 1fr; }
+}
+.password-field { position: relative; display: block; }
+.password-field .input { padding-right: 48px; }
+.password-toggle { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); width: 36px; height: 36px; border: 0; border-radius: 9px; background: transparent; color: var(--muted); display: grid; place-items: center; cursor: pointer; }
+.password-toggle:hover { background: var(--surface-soft); color: var(--ink); }

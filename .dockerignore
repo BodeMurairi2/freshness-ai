@@ -1,0 +1,58 @@
+# Backend image: only api/, src/, data/{train,validation,test}, models/model/ and requirements-api.txt are needed
+
+# secrets: passed at runtime with env_file, never baked into the image
+.env
+.env.*
+*.pem
+*.key
+
+# version control, editors, OS
+.git
+.gitignore
+.github
+.vscode
+.idea
+*.swp
+.DS_Store
+
+# Python leftovers
+venv
+.venv
+**/__pycache__
+**/*.py[cod]
+.pytest_cache
+.mypy_cache
+.ruff_cache
+
+# frontend has its own image and .dockerignore
+freshness_frontend
+
+# not used by the API
+notebook
+designs
+scripts
+locust
+logs
+README.md
+push.sh
+requirements.txt
+docker-compose.yml
+Caddyfile
+api/tests
+
+# data not needed at runtime (raw originals, notebook pictures, retraining samples)
+data/raw_data
+data/sample
+data/samples
+# uploads live in a volume, not in the image
+data/uploads/**/*.jpg
+data/uploads/**/*.jpeg
+data/uploads/**/*.png
+
+# models: only the original model is shipped; the rest is server state kept in a volume
+models/logs
+models/archive
+models/selected_model.txt
+models/retrain_status.json
+models/*.tmp
+models/model/*.tmp.keras

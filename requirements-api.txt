@@ -1,0 +1,25 @@
+# API
+fastapi[standard]==0.163.1
+python-multipart==0.0.34
+pydantic[standard]==2.14.3
+pydantic-settings==2.16.3
+
+# Images
+pillow==13.0.0
+pillow-heif==1.8.1
+opencv-python-headless==5.1.0.95
+
+# Modelling
+tensorflow==2.21.0
+keras==3.15.1
+h5py==3.14.0
+scikit-learn==1.9.1
+numpy==2.5.5
+
+# Database and file storage
+pymongo==4.20.1
+boto3==1.44.9
+
+# Authentication
+pyjwt==2.15.1
+pwdlib[argon2]==0.4.2

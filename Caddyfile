@@ -1,0 +1,36 @@
+# Caddy terminates HTTPS (Let's Encrypt certificates, renewed automatically)
+# and forwards requests to the containers on the internal Docker network.
+# Domains come from docker-compose.yml (APP_DOMAIN, API_DOMAIN).
+
+(security_headers) {
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		X-Content-Type-Options "nosniff"
+		X-Frame-Options "DENY"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		-Server
+	}
+}
+
+# React app
+{$APP_DOMAIN} {
+	import security_headers
+	encode zstd gzip
+	reverse_proxy frontend:80
+}
+
+# FastAPI (Swagger at /docs)
+{$API_DOMAIN} {
+	import security_headers
+	encode zstd gzip
+	# uploads for retraining can hold many photos
+	request_body {
+		max_size 200MB
+	}
+	reverse_proxy backend:8000 {
+		# Grad-CAM and predictions run on the CPU: give them time
+		transport http {
+			read_timeout 120s
+		}
+	}
+}

@@ -1,0 +1,16 @@
+# installed again inside the image with npm ci
+node_modules
+# built inside the image
+dist
+.vite
+# secrets and local env files
+.env
+.env.*
+# editors, OS, logs
+.vscode
+.idea
+.DS_Store
+*.log
+README.md
+Dockerfile
+.dockerignore

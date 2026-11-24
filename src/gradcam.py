@@ -50,16 +50,22 @@ class GradCam:
         return heatmap.numpy(), class_index
 
     @staticmethod
-    def overlay_heatmap(image: Image.Image, heatmap: np.ndarray, alpha: float = 0.4) -> bytes:
-        """Heatmap (red = most important) drawn over the image, as PNG bytes"""
+    def colored_heatmap(image: Image.Image, heatmap: np.ndarray) -> bytes:
+        """
+        Heatmap alone (red = most important), at the photo's size, as PNG bytes.
+        The browser lays it over the photo, so the user can change its opacity
+        """
         width, height = image.size
         heatmap_resized = cv2.resize(heatmap, (width, height), interpolation=cv2.INTER_CUBIC)
-        colored_heatmap = cv2.applyColorMap(np.uint8(255 * np.clip(heatmap_resized, 0, 1)), cv2.COLORMAP_JET)
-        colored_heatmap = cv2.cvtColor(colored_heatmap, cv2.COLOR_BGR2RGB)
-        blended = np.uint8((1 - alpha) * np.array(image) + alpha * colored_heatmap)
-
+        colored = cv2.applyColorMap(np.uint8(255 * np.clip(heatmap_resized, 0, 1)), cv2.COLORMAP_JET)
         buffer = io.BytesIO()
-        Image.fromarray(blended).save(buffer, format="PNG", optimize=True)
+        Image.fromarray(cv2.cvtColor(colored, cv2.COLOR_BGR2RGB)).save(buffer, format="PNG", optimize=True)
+        return buffer.getvalue()
+
+    @staticmethod
+    def photo_jpeg(image: Image.Image) -> bytes:
+        buffer = io.BytesIO()
+        image.save(buffer, format="JPEG", quality=90)
         return buffer.getvalue()
 
     def explain(self, image_file, image_processor: ImageProcessing, image_size) -> dict:
@@ -74,7 +80,9 @@ class GradCam:
         return {
             "predicted_class": CLASS_NAMES[predicted_index],
             "confidence": float(probabilities[predicted_index]),
-            "heatmap_png": self.overlay_heatmap(image, heatmap),
+            "probabilities": probabilities,
+            "photo_jpeg": self.photo_jpeg(image),
+            "heatmap_png": self.colored_heatmap(image, heatmap),
         }
 
 

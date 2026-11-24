@@ -1,0 +1,144 @@
+{
+  "model": "freshness-ai.keras",
+  "notebook": "notebook/freshness_ai.ipynb",
+  "figures": [
+    {
+      "name": "training-history",
+      "title": "Training history",
+      "caption": "Training and validation loss, accuracy, precision, recall and F1 for each epoch, with the learning rate. The dashed line marks epoch 25, whose weights were kept by early stopping.",
+      "file": "/notebook/training-history.webp",
+      "width": 1790,
+      "height": 887
+    },
+    {
+      "name": "confusion-matrix",
+      "title": "Confusion matrix (test set)",
+      "caption": "Predictions on the 640 test images. The diagonal holds the correct answers; everything else is a mistake.",
+      "file": "/notebook/confusion-matrix.webp",
+      "width": 1108,
+      "height": 1014
+    },
+    {
+      "name": "decision-threshold",
+      "title": "Decision threshold",
+      "caption": "Top-class confidence on the validation set, used to choose the 75% threshold below which an answer is marked as uncertain.",
+      "file": "/notebook/decision-threshold.webp",
+      "width": 1589,
+      "height": 490
+    },
+    {
+      "name": "class-distribution",
+      "title": "Class distribution",
+      "caption": "Number of images per class in the training, validation and test splits.",
+      "file": "/notebook/class-distribution.webp",
+      "width": 1784,
+      "height": 475
+    },
+    {
+      "name": "dataset-samples",
+      "title": "Dataset samples",
+      "caption": "Nine random photos from the dataset.",
+      "file": "/notebook/dataset-samples.webp",
+      "width": 1469,
+      "height": 1490
+    }
+  ],
+  "gradcam": [
+    {
+      "class_name": "fresh_apple",
+      "file": "/notebook/gradcam-fresh_apple.webp",
+      "width": 774,
+      "height": 403
+    },
+    {
+      "class_name": "fresh_banana",
+      "file": "/notebook/gradcam-fresh_banana.webp",
+      "width": 774,
+      "height": 403
+    },
+    {
+      "class_name": "fresh_grape",
+      "file": "/notebook/gradcam-fresh_grape.webp",
+      "width": 774,
+      "height": 403
+    },
+    {
+      "class_name": "fresh_guava",
+      "file": "/notebook/gradcam-fresh_guava.webp",
+      "width": 774,
+      "height": 403
+    },
+    {
+      "class_name": "fresh_jujube",
+      "file": "/notebook/gradcam-fresh_jujube.webp",
+      "width": 774,
+      "height": 403
+    },
+    {
+      "class_name": "fresh_orange",
+      "file": "/notebook/gradcam-fresh_orange.webp",
+      "width": 774,
+      "height": 403
+    },
+    {
+      "class_name": "fresh_pomegranate",
+      "file": "/notebook/gradcam-fresh_pomegranate.webp",
+      "width": 774,
+      "height": 403
+    },
+    {
+      "class_name": "fresh_strawberry",
+      "file": "/notebook/gradcam-fresh_strawberry.webp",
+      "width": 774,
+      "height": 403
+    },
+    {
+      "class_name": "rotten_apple",
+      "file": "/notebook/gradcam-rotten_apple.webp",
+      "width": 774,
+      "height": 403
+    },
+    {
+      "class_name": "rotten_banana",
+      "file": "/notebook/gradcam-rotten_banana.webp",
+      "width": 774,
+      "height": 403
+    },
+    {
+      "class_name": "rotten_grape",
+      "file": "/notebook/gradcam-rotten_grape.webp",
+      "width": 774,
+      "height": 403
+    },
+    {
+      "class_name": "rotten_guava",
+      "file": "/notebook/gradcam-rotten_guava.webp",
+      "width": 774,
+      "height": 403
+    },
+    {
+      "class_name": "rotten_jujube",
+      "file": "/notebook/gradcam-rotten_jujube.webp",
+      "width": 774,
+      "height": 403
+    },
+    {
+      "class_name": "rotten_orange",
+      "file": "/notebook/gradcam-rotten_orange.webp",
+      "width": 774,
+      "height": 403
+    },
+    {
+      "class_name": "rotten_pomegranate",
+      "file": "/notebook/gradcam-rotten_pomegranate.webp",
+      "width": 774,
+      "height": 403
+    },
+    {
+      "class_name": "rotten_strawberry",
+      "file": "/notebook/gradcam-rotten_strawberry.webp",
+      "width": 774,
+      "height": 403
+    }
+  ]
+}

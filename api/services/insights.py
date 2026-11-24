@@ -1,6 +1,7 @@
 """
 Numbers for the insights page: dataset, model scores and real-world usage.
 """
+import json
 from datetime import timedelta
 from functools import lru_cache
 from pathlib import Path
@@ -17,6 +18,7 @@ from src.target_class import CLASS_NAMES
 DATA_DIR = Path(__file__).resolve().parents[2] / "data"
 DATASET_SPLITS = ("train", "validation", "test")
 IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png"}
+DATASET_FEATURES_FILE = DATA_DIR / "dataset_features.json"  # scripts/compute_dataset_features.py
 
 
 def condition_of(class_name: str) -> str:
@@ -46,6 +48,14 @@ def dataset_counts() -> dict:
     }
 
 
+@lru_cache(maxsize=1)
+def dataset_features() -> dict | None:
+    """Visual features of the training images per class, computed once by a script"""
+    if not DATASET_FEATURES_FILE.exists():
+        return None
+    return json.loads(DATASET_FEATURES_FILE.read_text())
+
+
 async def dataset_insights(database: AsyncDatabase) -> dict:
     """
     This function adds the uploads (from MongoDB) to the fixed dataset counts
@@ -56,6 +66,7 @@ async def dataset_insights(database: AsyncDatabase) -> dict:
     uploads_per_class = {upload["_id"]: upload["count"] for upload in uploads}
     return {
         **dataset_counts(),
+        "features": dataset_features(),
         "uploads_per_class": uploads_per_class,
         "total_uploads": sum(uploads_per_class.values()),
     }
@@ -89,6 +100,14 @@ async def model_insights(database: AsyncDatabase) -> dict:
         insights.update({
             metric: scores[metric] for metric in ("accuracy", "precision", "recall", "f1", "auc_score")
         })
+        insights["training"] = selected.get("training")
+        # a retrained model continues from its parents: their trainings, oldest first, give the full path
+        by_name = {version["_id"]: version for version in versions}
+        lineage, parent_name = [], selected.get("parent_model")
+        while parent_name in by_name and len(lineage) < 50:
+            lineage.insert(0, by_name[parent_name].get("training"))
+            parent_name = by_name[parent_name].get("parent_model")
+        insights["lineage_training"] = [training for training in lineage if training]
         insights["f1_per_class"] = {
             class_name: class_scores["f1"] for class_name, class_scores in scores["per_class"].items()
         }

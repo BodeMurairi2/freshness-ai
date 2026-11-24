@@ -10,6 +10,7 @@ from api.config.settings import app_settings
 from api.database.connection import get_database
 from api.schemas.retraining import (
     UploadResponse,
+    StartRetraining,
     StartedRetraining,
     RetrainingRun,
     ModelList,
@@ -28,11 +29,12 @@ from src.target_class import CLASS_NAMES
 
 settings = app_settings()
 
-# every route here needs a logged in user
+# changing the model or its data needs a login; viewing the models is public
+LOGIN_REQUIRED = [Depends(get_current_user)]
+
 router = APIRouter(
     prefix="/retrain",
     tags=["Retrain the model with new dataset"],
-    dependencies=[Depends(get_current_user)],
 )
 
 @router.post("/model", response_model=UploadResponse)
@@ -95,13 +97,21 @@ async def retrain_custom_model(database: Annotated[AsyncDatabase, Depends(get_da
     }
 
 
-@router.post("/start", status_code=status.HTTP_202_ACCEPTED, response_model=StartedRetraining)
+@router.post("/start", status_code=status.HTTP_202_ACCEPTED, response_model=StartedRetraining, dependencies=LOGIN_REQUIRED)
 async def start_retraining(background_tasks: BackgroundTasks,
-                           database: Annotated[AsyncDatabase, Depends(get_database)]):
+                           database: Annotated[AsyncDatabase, Depends(get_database)],
+                           options: StartRetraining | None = None):
     """
     This function retrain button starts retraining in the background and answers immediately.
-    Follow the progress with GET /retrain/status.
+    epochs is optional (RETRAIN_EPOCHS from .env otherwise). Follow the progress with GET /retrain/status.
     """
+    epochs = options.epochs if options and options.epochs else settings.RETRAIN_EPOCHS
+    if epochs > settings.RETRAIN_MAX_EPOCHS:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Choose at most {settings.RETRAIN_MAX_EPOCHS} epochs"
+        )
+
     n_uploads = ModelRetrain.count_images(UPLOADS_DIR)
     if n_uploads < settings.RETRAIN_MIN_IMAGES:
         raise HTTPException(
@@ -110,18 +120,18 @@ async def start_retraining(background_tasks: BackgroundTasks,
                    f"({n_uploads} uploaded so far)"
         )
 
-    run_id = await start_run_if_idle(database, total_epochs=settings.RETRAIN_EPOCHS, uploaded_images=n_uploads)
+    run_id = await start_run_if_idle(database, total_epochs=epochs, uploaded_images=n_uploads)
     if run_id is None:
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT,
             detail="Retraining is already in progress. Follow it with GET /retrain/status"
         )
 
-    background_tasks.add_task(run_retraining, run_id)
-    return {"message": "Retraining started", "run_id": run_id, "uploaded_images": n_uploads}
+    background_tasks.add_task(run_retraining, run_id, epochs)
+    return {"message": "Retraining started", "run_id": run_id, "uploaded_images": n_uploads, "epochs": epochs}
 
 
-@router.get("/status", response_model=RetrainingRun, response_model_exclude_none=True)
+@router.get("/status", response_model=RetrainingRun, response_model_exclude_none=True, dependencies=LOGIN_REQUIRED)
 async def retraining_status(database: Annotated[AsyncDatabase, Depends(get_database)]):
     """
     This function shows the progress report in each epoch
@@ -141,7 +151,7 @@ async def models_performance(database: Annotated[AsyncDatabase, Depends(get_data
     return await list_model_performance(database)
 
 
-@router.post("/models/select", response_model=SelectedModel)
+@router.post("/models/select", response_model=SelectedModel, dependencies=LOGIN_REQUIRED)
 async def select_prediction_model(model_name: str = Form(..., description="e.g. freshness-ai.keras")):
     """This function chooses which model is used for predictions. No file is moved."""
     try:

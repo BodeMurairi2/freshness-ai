@@ -1,5 +1,6 @@
 import asyncio
 import base64
+import time
 from typing import Annotated
 
 from fastapi import File, UploadFile, BackgroundTasks, Depends
@@ -14,7 +15,8 @@ from api.services.prediction_records import keep_prediction_photo
 from src.gradcam import load_gradcam
 from src.model import get_selected_model_path
 from src.preprocessing import ImageProcessing
-from src.prediction import classify_image
+from src.prediction import classify_image, probability_details
+from src.target_class import CLASS_NAMES
 
 settings = app_settings()
 
@@ -23,6 +25,11 @@ router = APIRouter(
     tags=["Prediction"]
     )
 
+
+def data_url(content: bytes, media_type: str) -> str:
+    return f"data:{media_type};base64,{base64.b64encode(content).decode()}"
+
+
 @router.post("/", response_model=PredictionResult, response_model_exclude_none=True)
 async def prediction(background_tasks: BackgroundTasks,
                      database: Annotated[AsyncDatabase, Depends(get_database)],
@@ -30,8 +37,18 @@ async def prediction(background_tasks: BackgroundTasks,
     """prediction router"""
     await verify_image(file=image)
     prediction = classify_image()
-    predicted_class, confidence = await asyncio.to_thread(prediction.predict_top_class, image.file)
-    answer = prediction.build_answer(predicted_class, confidence)
+
+    started = time.perf_counter()
+    probabilities = await asyncio.to_thread(prediction.predict_probabilities, image.file)
+    latency_ms = round((time.perf_counter() - started) * 1000)
+
+    predicted_index = int(probabilities.argmax())
+    predicted_class, confidence = CLASS_NAMES[predicted_index], float(probabilities[predicted_index])
+    answer = {
+        **prediction.build_answer(predicted_class, confidence),
+        **probability_details(probabilities),
+        "latency_ms": latency_ms,
+    }
 
     await keep_prediction_photo(background_tasks, database, image.file, predicted_class,
                                 confidence, answer["status"], prediction.model_name)
@@ -48,13 +65,22 @@ async def prediction_with_gradcam(background_tasks: BackgroundTasks,
     await verify_image(file=image)
     prediction = classify_image()
     gradcam = load_gradcam(get_selected_model_path())
+
+    started = time.perf_counter()
     explanation = await asyncio.to_thread(gradcam.explain, image.file, ImageProcessing(), tuple(settings.IMAGE_SIZE))
-    answer = prediction.build_answer(explanation["predicted_class"], explanation["confidence"])
+    latency_ms = round((time.perf_counter() - started) * 1000)
+
+    answer = {
+        **prediction.build_answer(explanation["predicted_class"], explanation["confidence"]),
+        **probability_details(explanation["probabilities"]),
+        "latency_ms": latency_ms,
+    }
 
     await keep_prediction_photo(background_tasks, database, image.file, explanation["predicted_class"],
                                 explanation["confidence"], answer["status"], prediction.model_name)
     return {
         "prediction": answer,
         "explained_class": explanation["predicted_class"],
-        "heatmap_image": "data:image/png;base64," + base64.b64encode(explanation["heatmap_png"]).decode(),
+        "photo_image": data_url(explanation["photo_jpeg"], "image/jpeg"),
+        "heatmap_image": data_url(explanation["heatmap_png"], "image/png"),
     }

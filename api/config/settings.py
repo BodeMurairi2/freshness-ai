@@ -16,6 +16,9 @@ class AppSettings(BaseSettings):
     CORS_ALLOWED_ORIGINS:list[str] = ["http://localhost:5173", "http://127.0.0.1:5173"]
     CORS_ALLOWED_METHODS:list[str] = ["GET", "POST", "PUT", "DELETE", "PATCH"]
 
+    # API documentation (Swagger /docs, /redoc, /openapi.json): hidden by default
+    DOCS_ENABLED:bool = False
+
     # Hugging face
     HF_TOKEN:Optional[str] = None
 
@@ -29,9 +32,11 @@ class AppSettings(BaseSettings):
     IMAGE_SIZE:tuple[int, int]=(224, 224)
 
     # Retraining
-    RETRAIN_EPOCHS:int=2
+    RETRAIN_EPOCHS:int=2  # used when the user does not choose
+    RETRAIN_MAX_EPOCHS:int=10  # upper limit for a user's choice (protects the server)
     RETRAIN_LEARNING_RATE:float=1e-4
     RETRAIN_MIN_IMAGES:int=10
+    RETRAIN_SHUFFLE_BUFFER:int=512  # ~0.3 GB at 224x224; 3000 needs ~1.8 GB of RAM
 
     # Database
     MONGODB_USERNAME:str

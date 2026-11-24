@@ -1,0 +1,33 @@
+.topbar { position: sticky; top: 0; z-index: 20; background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+.topbar-inner { max-width: var(--page-width); margin: 0 auto; padding: 10px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.brand { display: flex; align-items: center; gap: 10px; color: var(--ink); }
+.brand:hover { text-decoration: none; }
+.brand-logo { width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; color: white; background: linear-gradient(135deg, var(--green-500), var(--green-700)); }
+.brand-name { display: block; font-weight: 800; letter-spacing: -0.02em; font-size: 16px; line-height: 1.1; }
+.brand-tagline { display: block; font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--green-700); }
+
+.main-nav { display: flex; gap: 4px; padding: 4px; background: var(--surface-soft); border: 1px solid var(--line); border-radius: 14px; }
+.nav-link { display: inline-flex; align-items: center; gap: 6px; padding: 7px 16px; border-radius: 10px; font-weight: 650; font-size: 14px; color: var(--ink-soft); }
+.nav-link:hover { text-decoration: none; background: white; }
+.nav-link.active { background: var(--green-600); color: white; box-shadow: 0 4px 12px rgba(31, 122, 63, 0.25); }
+
+.topbar-actions { display: flex; align-items: center; gap: 12px; }
+.docs-link { display: inline-flex; align-items: center; gap: 5px; font-size: 13.5px; font-weight: 600; color: var(--ink-soft); }
+.account { display: flex; align-items: center; gap: 4px; }
+.avatar { width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; background: var(--green-100); color: var(--green-700); font-weight: 800; font-size: 14px; }
+.menu-button { display: none; width: 40px; height: 40px; border-radius: 10px; border: 1px solid var(--line); background: white; place-items: center; cursor: pointer; }
+
+.footer { border-top: 1px solid var(--line); background: var(--surface); }
+.footer-inner { max-width: var(--page-width); margin: 0 auto; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+
+@media (max-width: 900px) {
+  .docs-link { display: none; }
+}
+@media (max-width: 760px) {
+  .topbar-inner { padding: 10px 16px; flex-wrap: wrap; }
+  .menu-button { display: grid; }
+  .main-nav { display: none; order: 3; width: 100%; flex-direction: column; background: white; }
+  .main-nav.open { display: flex; }
+  .nav-link { padding: 12px 14px; }
+  .footer-inner { padding: 16px; }
+}

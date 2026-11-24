@@ -44,6 +44,8 @@ data/**/*
 !data/test/**
 # ready-to-upload labelled images for testing retraining (scripts/download_samples.py)
 !data/samples/**
+# visual features of the training images, served by /insights (scripts/compute_dataset_features.py)
+!data/dataset_features.json
 *.zip
 *.tar.gz
 

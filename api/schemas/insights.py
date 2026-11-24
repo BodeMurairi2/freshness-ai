@@ -2,6 +2,25 @@ from datetime import datetime
 
 from pydantic import BaseModel
 
+from api.schemas.retraining import TrainingInfo
+
+
+class FeatureDescription(BaseModel):
+    label: str
+    unit: str
+    description: str
+
+
+class DatasetFeatures(BaseModel):
+    """
+    Visual features of the training images, averaged per class
+    """
+    computed_at: str
+    split: str
+    images: int
+    features: dict[str, FeatureDescription]  # saturation, dark_share, brown_share
+    per_class: dict[str, dict[str, float]]  # class -> {"images": n, "saturation": x, ...}
+
 
 class DatasetInsights(BaseModel):
     """
@@ -11,6 +30,7 @@ class DatasetInsights(BaseModel):
     split_totals: dict[str, int]
     condition_totals: dict[str, int]  # fresh / rotten
     total_images: int
+    features: DatasetFeatures | None = None
     uploads_per_class: dict[str, int]
     total_uploads: int
 
@@ -36,6 +56,8 @@ class ModelInsights(BaseModel):
     f1: float | None = None
     auc_score: float | None = None
     f1_per_class: dict[str, float] | None = None
+    training: TrainingInfo | None = None  # how the model was trained, epoch by epoch
+    lineage_training: list[TrainingInfo] = []  # for a retrained model: its parents' trainings, oldest first
     versions: list[ModelVersion]
 
 

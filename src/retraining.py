@@ -152,7 +152,7 @@ class ModelRetrain:
 
         combined = (
             old_train_data.concatenate(upload_data)
-            .shuffle(buffer_size=3000, seed=seed)
+            .shuffle(buffer_size=settings.RETRAIN_SHUFFLE_BUFFER, seed=seed)  # decoded images held in memory
             .batch(batch)
             .prefetch(tf.data.AUTOTUNE)
         )
@@ -186,6 +186,7 @@ class ModelRetrain:
                 tf.keras.metrics.Precision(name="Precision"),
                 tf.keras.metrics.Recall(name="Recall"),
                 tf.keras.metrics.F1Score(average="macro", name="F1Score"),
+                tf.keras.metrics.AUC(name="AUC"),
             ],
         )
         return self.model

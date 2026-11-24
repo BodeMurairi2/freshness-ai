@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import Any
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 
 
 # ----------------------------------------------------------------- uploads
@@ -55,10 +55,18 @@ class EpochResult(BaseModel):
 
 
 # ----------------------------------------------------------------- runs
+class StartRetraining(BaseModel):
+    """
+    Optional options of a retraining. Without epochs, RETRAIN_EPOCHS from .env is used
+    """
+    epochs: int | None = Field(None, ge=1, description="Number of epochs (1 to RETRAIN_MAX_EPOCHS)")
+
+
 class StartedRetraining(BaseModel):
     message: str
     run_id: str
     uploaded_images: int
+    epochs: int
 
 
 class RetrainingRun(BaseModel):
@@ -129,6 +137,8 @@ class TrainingInfo(BaseModel):
     learning_rate: float
     uploaded_images: int
     final_validation: FinalValidation
+    best_epoch: int | None = None  # epoch whose weights were kept
+    history: dict[str, list[float]] | None = None  # per epoch: loss, val_loss, accuracy, val_accuracy...
 
 
 class ModelPerformance(BaseModel):

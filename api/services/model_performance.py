@@ -79,6 +79,8 @@ def save_model_performance(run_id: str, base_model_name: str, result: dict):
                 "loss": history["val_loss"][-1],
                 "accuracy": history["val_accuracy"][-1],
             },
+            "best_epoch": len(history["val_loss"]),  # no early stopping: the last epoch is kept
+            "history": {metric: [round(value, 4) for value in values] for metric, values in history.items()},
         },
         "test_evaluation": test_evaluation(result["after"]),
     })

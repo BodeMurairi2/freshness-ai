@@ -19,7 +19,7 @@ RETRAIN_DATA_FOLDERS = {
 }
 
 
-def run_retraining(run_id: str):
+def run_retraining(run_id: str, epochs: int):
     """
     Retrains the selected model and reports progress to the run document.
     A plain def: FastAPI runs it in a worker thread, so predictions keep working.
@@ -29,7 +29,7 @@ def run_retraining(run_id: str):
     try:
         retrainer = ModelRetrain()
         base_model_name = retrainer.model_path.name
-        result = retrainer.retrain_model(data=RETRAIN_DATA_FOLDERS, report_progress=report_progress)
+        result = retrainer.retrain_model(data=RETRAIN_DATA_FOLDERS, epochs=epochs, report_progress=report_progress)
     except Exception as error:
         report_progress(
             state="failed",

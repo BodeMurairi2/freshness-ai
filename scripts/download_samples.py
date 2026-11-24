@@ -31,6 +31,10 @@ data/samples/SOURCES.csv records where every saved image came from.
 Usage (from the repo root):
     python scripts/download_samples.py                 # 25 images per class
     python scripts/download_samples.py --per-class 30  # more per class
+
+Then run scripts/keep_correct_samples.py: photos from other datasets often look different
+or are labelled differently (e.g. FruitNet "Bad" is not always visibly rotten), so only the
+ones the model classifies correctly are kept, and the grape copies of training images are removed.
 """
 
 from __future__ import annotations

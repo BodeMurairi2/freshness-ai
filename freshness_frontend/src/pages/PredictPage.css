@@ -1,0 +1,39 @@
+.dropzone { border: 2px dashed var(--green-200); background: var(--green-50); border-radius: var(--radius-large); padding: 34px 20px; display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center; transition: border-color 0.15s, background 0.15s; min-height: 270px; justify-content: center; }
+.dropzone.dragging { border-color: var(--green-500); background: var(--green-100); }
+.dropzone-icon { width: 54px; height: 54px; border-radius: 16px; background: white; display: grid; place-items: center; color: var(--green-600); box-shadow: var(--shadow); }
+.sample-button { cursor: pointer; padding: 3px 10px 3px 3px; }
+.sample-button img { width: 22px; height: 22px; border-radius: 50%; object-fit: cover; }
+.sample-button:hover:not(:disabled) { border-color: var(--green-500); }
+
+.steps-list { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 12px; color: var(--ink-soft); font-size: 14px; }
+
+.fruit-grid { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 12px; }
+.fruit-tile { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 10px 10px 12px; display: flex; flex-direction: column; align-items: center; gap: 4px; box-shadow: var(--shadow); }
+.fruit-tile img { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; margin-bottom: 4px; }
+.guideline-icon { width: 40px; height: 40px; border-radius: 12px; background: var(--green-100); color: var(--green-700); display: grid; place-items: center; }
+
+.segmented { display: inline-flex; background: var(--surface-soft); border: 1px solid var(--line); border-radius: 12px; padding: 3px; gap: 3px; }
+.segmented button { display: inline-flex; align-items: center; gap: 6px; border: 0; background: transparent; padding: 7px 12px; border-radius: 9px; font-weight: 650; font-size: 13.5px; color: var(--muted); cursor: pointer; }
+.segmented button.on { background: var(--green-600); color: white; }
+
+.photo-frame { position: relative; border-radius: var(--radius); overflow: hidden; background: #1d2333; aspect-ratio: 1; }
+.photo-frame img { width: 100%; height: 100%; object-fit: contain; }
+.photo-frame .heatmap-layer { position: absolute; inset: 0; mix-blend-mode: normal; }
+.photo-tag { position: absolute; left: 12px; top: 12px; background: rgba(20, 26, 43, 0.75); color: white; font-family: var(--mono); font-size: 11px; padding: 5px 9px; border-radius: 8px; }
+.heat-scale { height: 9px; border-radius: 999px; background: linear-gradient(90deg, #00008f, #0050ff, #00d4ff, #50ff9f, #ffe600, #ff5a00, #9c0000); }
+
+.verdict { font-size: clamp(30px, 4vw, 42px); }
+.confidence-value { font-size: 30px; font-weight: 800; color: var(--green-700); font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+.confidence-value.low { color: var(--orange-700); }
+.disclosure { width: 100%; background: none; border: 0; padding: 0; cursor: pointer; color: var(--ink-soft); }
+.reason { display: flex; gap: 10px; align-items: flex-start; color: var(--orange-700); }
+.reason p { margin-top: 2px; }
+.mono-text { font-family: var(--mono); font-size: 12.5px; }
+
+@media (max-width: 1024px) {
+  .fruit-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@media (max-width: 480px) {
+  .fruit-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .dropzone { padding: 24px 14px; min-height: 0; }
+}

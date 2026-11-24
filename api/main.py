@@ -3,6 +3,7 @@ import uvicorn
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
 
+from api.config.settings import app_settings
 from api.router import routing
 from api.services.app_description import app_information
 
@@ -17,7 +18,13 @@ async def lifespan(app:FastAPI):
     yield
     await mongo.close()
 
+settings = app_settings()
+
+# Swagger (/docs), ReDoc (/redoc) and the OpenAPI schema are hidden unless DOCS_ENABLED=true
 app = FastAPI(
+    docs_url="/docs" if settings.DOCS_ENABLED else None,
+    redoc_url="/redoc" if settings.DOCS_ENABLED else None,
+    openapi_url="/openapi.json" if settings.DOCS_ENABLED else None,
     title=app_information["title"],
     summary=app_information["summary"],
     description=app_information["description"],

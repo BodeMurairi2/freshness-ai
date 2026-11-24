@@ -1,0 +1,120 @@
+{
+  "computed_at": "2026-11-24T06:50:29+00:00",
+  "split": "train",
+  "images": 2080,
+  "features": {
+    "saturation": {
+      "label": "Colour saturation",
+      "unit": "mean saturation (0-1)",
+      "description": "How colourful the photo is. Rotting fruit tends to lose its bright colour."
+    },
+    "dark_share": {
+      "label": "Dark spots",
+      "unit": "share of pixels darker than 30%",
+      "description": "Dark patches such as bruises, black spots or mould."
+    },
+    "brown_share": {
+      "label": "Brown areas",
+      "unit": "share of brown pixels",
+      "description": "Brown, decaying skin or flesh."
+    }
+  },
+  "per_class": {
+    "fresh_apple": {
+      "images": 130,
+      "saturation": 0.3755,
+      "dark_share": 0.0179,
+      "brown_share": 0.0199
+    },
+    "fresh_banana": {
+      "images": 130,
+      "saturation": 0.3438,
+      "dark_share": 0.0478,
+      "brown_share": 0.138
+    },
+    "fresh_grape": {
+      "images": 130,
+      "saturation": 0.3368,
+      "dark_share": 0.0374,
+      "brown_share": 0.0102
+    },
+    "fresh_guava": {
+      "images": 130,
+      "saturation": 0.3838,
+      "dark_share": 0.1102,
+      "brown_share": 0.0124
+    },
+    "fresh_jujube": {
+      "images": 130,
+      "saturation": 0.1701,
+      "dark_share": 0.0262,
+      "brown_share": 0.0466
+    },
+    "fresh_orange": {
+      "images": 130,
+      "saturation": 0.3859,
+      "dark_share": 0.0206,
+      "brown_share": 0.073
+    },
+    "fresh_pomegranate": {
+      "images": 130,
+      "saturation": 0.4871,
+      "dark_share": 0.0869,
+      "brown_share": 0.1173
+    },
+    "fresh_strawberry": {
+      "images": 130,
+      "saturation": 0.331,
+      "dark_share": 0.0576,
+      "brown_share": 0.0557
+    },
+    "rotten_apple": {
+      "images": 130,
+      "saturation": 0.2733,
+      "dark_share": 0.0458,
+      "brown_share": 0.0312
+    },
+    "rotten_banana": {
+      "images": 130,
+      "saturation": 0.1758,
+      "dark_share": 0.1058,
+      "brown_share": 0.0958
+    },
+    "rotten_grape": {
+      "images": 130,
+      "saturation": 0.3587,
+      "dark_share": 0.0523,
+      "brown_share": 0.0474
+    },
+    "rotten_guava": {
+      "images": 130,
+      "saturation": 0.307,
+      "dark_share": 0.1059,
+      "brown_share": 0.1528
+    },
+    "rotten_jujube": {
+      "images": 130,
+      "saturation": 0.1527,
+      "dark_share": 0.0214,
+      "brown_share": 0.0541
+    },
+    "rotten_orange": {
+      "images": 130,
+      "saturation": 0.3874,
+      "dark_share": 0.0331,
+      "brown_share": 0.0523
+    },
+    "rotten_pomegranate": {
+      "images": 130,
+      "saturation": 0.2473,
+      "dark_share": 0.0443,
+      "brown_share": 0.0335
+    },
+    "rotten_strawberry": {
+      "images": 130,
+      "saturation": 0.201,
+      "dark_share": 0.0538,
+      "brown_share": 0.0177
+    }
+  }
+}

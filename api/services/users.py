@@ -23,6 +23,10 @@ async def find_user(database: AsyncDatabase, email_address: str) -> dict | None:
     return await database[USERS].find_one({"email_address": email_address.lower()})
 
 
+async def username_taken(database: AsyncDatabase, username: str) -> bool:
+    return await database[USERS].count_documents({"username": username.lower()}, limit=1) > 0
+
+
 async def find_user_for_login(database: AsyncDatabase, email_or_username: str) -> dict | None:
     """Login accepts the email or the username"""
     identifier = email_or_username.strip().lower()

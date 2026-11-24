@@ -92,6 +92,12 @@ class RegisteredUser(BaseModel):
     email_address: EmailStr
 
 
+class UsernameAvailability(BaseModel):
+    username: str
+    available: bool
+    message: str
+
+
 class AccessToken(BaseModel):
     access_token: str
     token_type: str = "bearer"

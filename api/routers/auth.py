@@ -1,15 +1,25 @@
+import re
 from typing import Annotated
 
-from fastapi import HTTPException, Depends, BackgroundTasks, status
+from fastapi import HTTPException, Depends, BackgroundTasks, Query, status
 from fastapi.routing import APIRouter
 from pymongo.asynchronous.database import AsyncDatabase
 
 from api.database.connection import get_database
 from api.schemas.common import MessageResponse
-from api.schemas.users import NewUser, UserLogin, PasswordCodeRequest, ChangePassword, AccessToken, RegisteredUser
+from api.schemas.users import (
+    NewUser,
+    UserLogin,
+    PasswordCodeRequest,
+    ChangePassword,
+    AccessToken,
+    RegisteredUser,
+    UsernameAvailability,
+    USERNAME_PATTERN,
+)
 from api.services.password_codes import create_code, check_code, send_code_email
 from api.services.security import verify_password, create_access_token
-from api.services.users import find_user, find_user_for_login, create_user, update_password
+from api.services.users import find_user, find_user_for_login, create_user, update_password, username_taken
 
 router = APIRouter(
     prefix="/auth",
@@ -35,6 +45,19 @@ async def register(new_user: NewUser, database: Annotated[AsyncDatabase, Depends
         "username": new_user.username,
         "email_address": new_user.email_address.lower(),
     }
+
+
+@router.get("/username-available", response_model=UsernameAvailability)
+async def username_available(database: Annotated[AsyncDatabase, Depends(get_database)],
+                             username: str = Query(..., description="Username to check while registering")):
+    """
+    This function tells the registration form if a username is valid and free
+    """
+    if not re.match(USERNAME_PATTERN, username):
+        return {"username": username, "available": False, "message": "Username needs 3-30 letters, digits, _ or ."}
+    if await username_taken(database, username):
+        return {"username": username.lower(), "available": False, "message": "This username is already taken"}
+    return {"username": username.lower(), "available": True, "message": "Username available"}
 
 
 @router.post("/login", response_model=AccessToken)

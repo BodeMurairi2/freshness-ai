@@ -24,6 +24,10 @@ services:
       dockerfile: Dockerfile
       args:
         VITE_API_URL: https://${API_DOMAIN:-api.freshness.bodemurairi.me}
+        # read from the backend's .env, so the frontend always shows the same limits
+        VITE_DECISION_THRESHOLD: ${DECISION_THRESHOLD:-0.75}
+        VITE_RETRAIN_MIN_IMAGES: ${RETRAIN_MIN_IMAGES:-4}
+        VITE_RETRAIN_MAX_EPOCHS: ${RETRAIN_MAX_EPOCHS:-10}
     image: freshness-ai-frontend
     restart: unless-stopped
     expose:

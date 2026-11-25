@@ -269,10 +269,7 @@ function ResultView({ result, onReset }) {
               </div>
               <span className="small muted">Most likely</span>
               <h1 className="verdict" style={{ marginTop: -8 }}>{capitalize(prediction.fruit_condition)} {prediction.fruit_name}</h1>
-              <p className="small muted">
-                The model is only {percent(confidence)} sure, below the {percent(DECISION_THRESHOLD, 0)} it needs for a confident answer.
-                Treat this result with caution and check the other possibilities below.
-              </p>
+              <p className="small muted">AI models can be inaccurate.</p>
               <ConfidenceMeter confidence={confidence} />
             </div>
           )}
@@ -336,7 +333,6 @@ function ConfidenceMeter({ confidence }) {
       <div className="row between tiny muted">
         <span>0%</span><span>{percent(DECISION_THRESHOLD, 0)} threshold</span><span>100%</span>
       </div>
-      <p className="tiny muted">Below {percent(DECISION_THRESHOLD, 0)}, the answer is marked as uncertain.</p>
     </div>
   );
 }

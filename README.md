@@ -30,16 +30,16 @@ Stack: FastAPI and TensorFlow (backend), React and Vite (frontend), MongoDB Atla
 
 Overall performance of the deployed model, `freshness-ai.keras`.
 
-| Metric | Validation (480 images) | Test (640 images) |
-|---|---|---|
-| Accuracy | 96.25% | 98.59% |
-| Precision | 97.45% | 98.61% |
-| Recall | 95.63% | 98.59% |
-| F1 score | 96.23% | 98.58% |
-| Loss | 0.1123 | – |
-| ROC-AUC | – | 99.97% |
+| Metric | Training (2,080 images) | Validation (480 images) | Test (640 images) |
+|---|---|---|---|
+| Accuracy | 99.33% | 96.25% | 98.59% |
+| Precision | 99.42% | 97.45% | 98.61% |
+| Recall | 98.99% | 95.63% | 98.59% |
+| F1 score | 99.32% | 96.23% | 98.58% |
+| Loss | 0.0448 | 0.1123 | – |
+| ROC-AUC | – | – | 99.97% |
 
-Validation values come from epoch 25, the epoch kept by early stopping (out of 30). On the test set, 9 of 640 photos were misclassified.
+Training and validation values come from epoch 25, the epoch kept by early stopping (out of 30). Training values were measured with data augmentation on. On the test set, 9 of 640 photos were misclassified.
 
 ## Setup
 

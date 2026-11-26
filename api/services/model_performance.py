@@ -1,6 +1,3 @@
-"""
-One document per model in the models collection: how it was trained and its test set scores.
-"""
 from bson import ObjectId
 
 from api.config.settings import app_settings

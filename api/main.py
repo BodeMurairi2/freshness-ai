@@ -11,6 +11,7 @@ from api.database.connection import mongo
 from api.database.indexes import create_indexes
 
 from api.cors_handler.cors_middleware import cors_handler
+
 @asynccontextmanager
 async def lifespan(app:FastAPI):
     await mongo.connect()

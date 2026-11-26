@@ -74,9 +74,9 @@ class UsageInsights(BaseModel):
     answered: int
     refused: int
     refusal_rate: float
-    average_confidence: float | None = None  # answered predictions only
-    predictions_per_class: dict[str, int]  # answered predictions only
-    condition_totals: dict[str, int]  # fresh / rotten, answered only
+    average_confidence: float | None = None
+    predictions_per_class: dict[str, int]
+    condition_totals: dict[str, int]
     last_7_days: list[DailyPredictions]
 
 

@@ -1,7 +1,4 @@
-"""
-6-digit codes sent by email to change (or reset) a password.
-One active code per email, stored hashed, deleted by MongoDB once expired.
-"""
+
 import hashlib
 import hmac
 import logging

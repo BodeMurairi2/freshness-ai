@@ -1,7 +1,4 @@
-"""
-Prediction photos kept unlabelled in R2 (data/predictions/), with their metadata
-in the predictions collection, to be labelled later and used for retraining.
-"""
+
 import asyncio
 import logging
 from uuid import uuid4

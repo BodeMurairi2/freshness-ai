@@ -1,6 +1,3 @@
-"""
-The retraining job that runs in the background after POST /retrain/start.
-"""
 from functools import partial
 from pathlib import Path
 

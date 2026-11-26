@@ -1,7 +1,3 @@
-"""
-Retraining progress, one document per run in the retraining_runs collection.
-The frontend polls the latest run with GET /retrain/status.
-"""
 from datetime import datetime, timedelta, timezone
 
 from bson import ObjectId

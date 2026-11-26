@@ -2,10 +2,10 @@ from pydantic import BaseModel
 
 
 class ClassProbability(BaseModel):
-    class_name: str  # e.g. fresh_banana
+    class_name: str
     fruit_name: str
-    fruit_condition: str  # fresh / rotten
-    probability: float  # 0-1
+    fruit_condition: str
+    probability: float
 
 
 class PredictionResult(BaseModel):
@@ -34,5 +34,5 @@ class GradCamResult(BaseModel):
     """
     prediction: PredictionResult
     explained_class: str
-    photo_image: str  # JPEG data URL, the photo the model saw (512 px)
-    heatmap_image: str  # PNG data URL, same size as the photo
+    photo_image: str
+    heatmap_image: str

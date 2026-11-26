@@ -1,6 +1,3 @@
-"""
-Password hashing and JWT tokens.
-"""
 from datetime import datetime, timedelta, timezone
 
 import jwt

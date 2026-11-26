@@ -4,7 +4,6 @@ from typing import Any
 from pydantic import BaseModel, ConfigDict, Field
 
 
-# ----------------------------------------------------------------- uploads
 class UploadRecord(BaseModel):
     """
     One uploaded image. storage_status becomes "stored" (or "failed") once sent to R2
@@ -21,7 +20,6 @@ class UploadResponse(BaseModel):
     uploads: list[UploadRecord]
 
 
-# ----------------------------------------------------------------- evaluation
 class Evaluation(BaseModel):
     """
     Test set evaluation of a model, before or after retraining
@@ -32,7 +30,7 @@ class Evaluation(BaseModel):
     f1: float
     auc_score: float
     confusion: list[list[int]]
-    report: dict[str, Any]  # sklearn classification report, per class
+    report: dict[str, Any]
 
 
 class RetrainingResult(BaseModel):
@@ -54,7 +52,6 @@ class EpochResult(BaseModel):
     epoch: int
 
 
-# ----------------------------------------------------------------- runs
 class StartRetraining(BaseModel):
     """
     Optional options of a retraining. Without epochs, RETRAIN_EPOCHS from .env is used
@@ -95,7 +92,6 @@ class RetrainingRun(BaseModel):
     performance_error: str | None = None
 
 
-# ----------------------------------------------------------------- models
 class ModelList(BaseModel):
     selected: str
     latest: str
@@ -104,7 +100,7 @@ class ModelList(BaseModel):
 
 class SelectedModel(BaseModel):
     selected: str
-    location: str  # "model" (latest) or "archive"
+    location: str
     latest: str
 
 
@@ -137,8 +133,8 @@ class TrainingInfo(BaseModel):
     learning_rate: float
     uploaded_images: int
     final_validation: FinalValidation
-    best_epoch: int | None = None  # epoch whose weights were kept
-    history: dict[str, list[float]] | None = None  # per epoch: loss, val_loss, accuracy, val_accuracy...
+    best_epoch: int | None = None
+    history: dict[str, list[float]] | None = None
 
 
 class ModelPerformance(BaseModel):

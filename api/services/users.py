@@ -1,6 +1,3 @@
-"""
-Users in the users collection, and the dependency that protects routes.
-"""
 from typing import Annotated
 
 from fastapi import Depends, HTTPException, status

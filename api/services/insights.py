@@ -1,6 +1,4 @@
-"""
-Numbers for the insights page: dataset, model scores and real-world usage.
-"""
+
 import json
 from datetime import timedelta
 from functools import lru_cache

@@ -4,7 +4,7 @@ Freshness-ai tells you whether a fruit is **fresh or rotten** from a single phot
 
 ## Video demo
 
-YouTube: **<add the YouTube link here>**
+YouTube: **[Watch the demo](https://youtu.be/AhtC3tD3Sls)**
 
 ## URLs
 
@@ -12,6 +12,7 @@ YouTube: **<add the YouTube link here>**
 |---|---|
 | Web app | https://freshness.bodemurairi.me |
 | API | https://api.freshness.bodemurairi.me |
+| Documentation | https://api.freshness.bodemurairi.me/docs |
 
 ## Project description
 
@@ -61,6 +62,62 @@ The application has four pages:
 | AWS EC2 | `c7i-flex.large` instance (2 vCPUs, 4 GB RAM), Ubuntu 24.04 |
 | Namecheap DNS | `freshness.bodemurairi.me` and `api.freshness.bodemurairi.me` |
 
+## Project structure
+
+```text
+freshness-ai/
+├── api/                        FastAPI backend
+│   ├── main.py                 app start: database connection, CORS, routes
+│   ├── router.py               registers all the routes
+│   ├── config/                 settings read from .env
+│   ├── cors_handler/           allowed frontend addresses (CORS)
+│   ├── database/               MongoDB Atlas connection and indexes
+│   ├── routers/                endpoints: /predict, /retrain, /insights, /auth
+│   ├── schemas/                request and response formats (Pydantic)
+│   └── services/               logic behind the endpoints: image checks, uploads to R2,
+│                               retraining jobs, model metrics, users, emails, insights
+├── src/                        machine learning code, used by the API and the notebook
+│   ├── preprocessing.py        image loading and resizing to 224×224
+│   ├── model.py                loading, listing and selecting model versions
+│   ├── prediction.py           predictions, confidence and decision threshold
+│   ├── gradcam.py              Grad-CAM heatmaps
+│   ├── retraining.py           retraining on uploaded photos and evaluation on the test set
+│   └── target_class.py         the 16 class names
+├── notebook/
+│   └── freshness_ai.ipynb      data analysis, training, evaluation and Grad-CAM of the original model
+├── models/
+│   └── model/                  the deployed model (freshness-ai.keras)
+├── data/
+│   ├── train/                  2,080 training images, one folder per class
+│   ├── validation/             480 validation images
+│   ├── test/                   640 test images
+│   ├── samples/                labelled photos (not from the dataset) to try retraining
+│   ├── sample/                 a few photos to try predictions
+│   ├── uploads/                photos uploaded for retraining (one folder per class)
+│   └── dataset_features.json   colour, dark spots and brown areas per class (insights page)
+├── scripts/                    one-off tools: download and resize the dataset, build the samples,
+│                               back up the data to R2, export notebook figures, save training history
+├── freshness_frontend/         React web app (Vite)
+│   ├── src/pages/              Predict, Models, Insights, Retrain and account pages
+│   ├── src/components/         layout, charts, training curves, notebook figures
+│   ├── src/api/                calls to the API
+│   ├── src/auth/               sign-in state
+│   ├── src/data/               fruit classes and sample photos
+│   ├── public/                 fruit pictures, sample photos and notebook figures
+│   ├── Dockerfile              builds the app and serves it with nginx
+│   └── nginx.conf              nginx settings
+├── locust/
+│   ├── locustfile.py           flood request simulation
+│   ├── run_load_test.sh        runs it for any number of users
+│   └── results/                CSV results of the test runs
+├── Dockerfile                  backend image
+├── docker-compose.yml          backend, frontend and Caddy containers
+├── Caddyfile                   HTTPS and routing for the two domains
+├── requirements.txt            all Python packages (notebook, API, load test)
+├── requirements-api.txt        Python packages for the backend image only
+└── .env.example                every setting the backend needs, with explanations
+```
+
 ## Model performance
 
 Overall performance of the deployed model, `freshness-ai.keras`.
@@ -89,25 +146,86 @@ All application data is stored in a MongoDB Atlas cluster, in the `freshness_ai`
 | `predictions` | prediction made in the app | created_at |
 | `password_codes` | password reset code (stored hashed) | deleted automatically when expired |
 
+### Screenshots of the database
+
+The `freshness_ai` database on the MongoDB Atlas cluster `freshnes-ai`, opened with MongoDB Compass. The six collections are listed on the left.
+
+**`uploads`**: each uploaded photo with its label, its file in Cloudflare R2 (`storage_url`) and the user who uploaded it (`uploaded_by`, blurred here).
+
+![uploads collection](docs/images/mongodb-uploads-1.png)
+
+**`retraining_runs`**: a finished retraining run with its result: new model, number of uploads, training history, and test results before and after.
+
+![retraining run with its result](docs/images/mongodb-retraining-run-result.png)
+
+**`models`**: the original model (trained in the notebook) and the retrained model, linked to its parent model and its retraining run.
+
+![models collection](docs/images/mongodb-models.png)
+
+**Training history of the retrained model**, saved per epoch with the test results.
+
+![retrained model with its training history](docs/images/mongodb-model-retrained.png)
+
+<details>
+<summary>More screenshots: the other uploads, the run's progress and metrics, the original model, predictions and users</summary>
+
+![uploads, page 2](docs/images/mongodb-uploads-2.png)
+
+![uploads, page 3](docs/images/mongodb-uploads-3.png)
+
+![uploads, page 4](docs/images/mongodb-uploads-4.png)
+
+![retraining run progress](docs/images/mongodb-retraining-run.png)
+
+![retraining run final metrics](docs/images/mongodb-retraining-run-metrics.png)
+
+![original model with test evaluation](docs/images/mongodb-model-original.png)
+
+![predictions collection](docs/images/mongodb-predictions.png)
+
+![users collection](docs/images/mongodb-users.png)
+
+</details>
+
+### Where the data is saved in the code
+
+**Uploaded files (photo in Cloudflare R2, metadata in the `uploads` collection)**
+
+| Step | Code |
+|---|---|
+| `POST /retrain/model` receives the photos and their labels (signed-in users only) | [api/routers/retraining.py](api/routers/retraining.py#L41) |
+| Each photo is saved and its metadata (label, path, size, original name, `uploaded_by`, date) is inserted in MongoDB | [api/services/save_image.py](api/services/save_image.py#L57) |
+| After the response, each photo is sent to R2 and its public link (`storage_url`) is saved in the same document | [api/services/save_image.py](api/services/save_image.py#L81), [api/services/file_storage.py](api/services/file_storage.py#L37) |
+
+**Training history**
+
+| What is saved | Collection | Code |
+|---|---|---|
+| A retraining run and its live progress: stage, epoch, metrics of every epoch | `retraining_runs` | [api/services/retrain_status.py](api/services/retrain_status.py#L36), updated by the Keras callback in [src/retraining.py](src/retraining.py#L43) |
+| A retrained model: full training history, test metrics, parent model | `models` | [api/services/model_performance.py](api/services/model_performance.py#L42), called by [api/services/retrain_job.py](api/services/retrain_job.py#L22) |
+| The original model: 30-epoch history from the notebook's TensorBoard logs | `models` | [scripts/save_training_history.py](scripts/save_training_history.py) |
+
+**Predictions** (photo in R2, result in the `predictions` collection): [api/services/prediction_records.py](api/services/prediction_records.py#L21).
+
 ### Example documents
 
-Documents are shown in MongoDB Extended JSON, as in the Atlas Data Explorer (`$oid` is an ObjectId, `$date` a date). The original `models` document and the `predictions` document are real, copied from the database. The others have the exact structure the application saves, with example values (random IDs and a fictional user).
+Documents are shown in MongoDB Extended JSON, as in the Atlas Data Explorer (`$oid` is an ObjectId, `$date` a date). The `uploads`, `predictions`, `retraining_runs` and `models` documents are real, copied from the database (the same ones as in the screenshots); the uploader's email address is hidden. The `users` and `password_codes` documents show the exact structure the application saves, with example values.
 
 **`uploads`**: one photo uploaded for retraining, with the user who uploaded it and its link in Cloudflare R2.
 
 ```json
 {
-  "_id": {"$oid": "6b069ee276d687b2e8c6283f"},
-  "label": "rotten_banana",
-  "path": "data/uploads/rotten_banana/d21210cfe429436498fc5fa536798afc.jpg",
-  "storage_key": "data/uploads/rotten_banana/d21210cfe429436498fc5fa536798afc.jpg",
-  "storage_url": "https://pub-361760f4867840d5909c223133f836a9.r2.dev/data/uploads/rotten_banana/d21210cfe429436498fc5fa536798afc.jpg",
+  "_id": {"$oid": "6b07fd755ec92ecd937d6c4f"},
+  "label": "fresh_apple",
+  "path": "data/uploads/fresh_apple/5642d75d99204567a76674206d43de41.jpg",
+  "storage_key": "data/uploads/fresh_apple/5642d75d99204567a76674206d43de41.jpg",
+  "storage_url": "https://pub-361760f4867840d5909c223133f836a9.r2.dev/data/uploads/fresh_apple/5642d75d99204567a76674206d43de41.jpg",
   "storage_status": "stored",
   "storage_error": null,
-  "original_filename": "IMG_20251124_183552.jpg",
-  "size_bytes": 48213,
-  "uploaded_by": "amina.uwase@example.com",
-  "uploaded_at": {"$date": "2026-11-25T08:40:02.341Z"}
+  "original_filename": "1.jpg",
+  "size_bytes": 8815,
+  "uploaded_by": "b.m*******@alustudent.com",
+  "uploaded_at": {"$date": "2026-11-26T09:35:49.669Z"}
 }
 ```
 
@@ -155,72 +273,57 @@ Documents are shown in MongoDB Extended JSON, as in the Atlas Data Explorer (`$o
 }
 ```
 
-**`retraining_runs`**: one finished retraining run on 4 uploaded photos. The Retrain page reads this document every few seconds to show the live progress. `before` and `after` are the test-set results of the old and the new model.
+**`retraining_runs`**: the retraining run from the demo (7 uploaded photos, 1 epoch). The Retrain page reads this document every few seconds to show the live progress. `before` and `after` are the test-set results of the old and the new model.
 
 <details>
 <summary>Show the full <code>retraining_runs</code> document</summary>
 
 ```json
 {
-  "_id": {"$oid": "6b069f2689bd317595b12f35"},
+  "_id": {"$oid": "6b07fd775ec92ecd937d6c56"},
   "state": "done",
   "stage": "finished",
-  "started_at": {"$date": "2026-11-25T08:41:10.118Z"},
-  "updated_at": {"$date": "2026-11-25T09:02:47.905Z"},
-  "finished_at": {"$date": "2026-11-25T09:02:47.905Z"},
-  "total_epochs": 2,
-  "uploaded_images": 4,
+  "started_at": {"$date": "2026-11-26T09:35:51.596Z"},
+  "updated_at": {"$date": "2026-11-26T09:37:36.732Z"},
+  "finished_at": {"$date": "2026-11-26T09:37:36.732Z"},
+  "total_epochs": 1,
+  "uploaded_images": 7,
   "progress_percent": 100,
   "epoch_history": [
     {
       "epoch": 1,
-      "AUC": 0.9993,
-      "F1Score": 0.9887,
+      "AUC": 0.9997,
+      "F1Score": 0.9876,
       "Precision": 0.9904,
-      "Recall": 0.9866,
-      "accuracy": 0.9885,
-      "loss": 0.0392,
-      "val_AUC": 0.9984,
-      "val_F1Score": 0.9645,
-      "val_Precision": 0.9705,
-      "val_Recall": 0.9604,
-      "val_accuracy": 0.9646,
-      "val_loss": 0.1068
-    },
-    {
-      "epoch": 2,
-      "AUC": 0.9996,
-      "F1Score": 0.9916,
-      "Precision": 0.9928,
-      "Recall": 0.9909,
-      "accuracy": 0.9918,
-      "loss": 0.0297,
-      "val_AUC": 0.9987,
-      "val_F1Score": 0.9666,
-      "val_Precision": 0.9727,
-      "val_Recall": 0.9646,
-      "val_accuracy": 0.9667,
-      "val_loss": 0.1032
+      "Recall": 0.9861,
+      "accuracy": 0.9875,
+      "loss": 0.0518,
+      "val_AUC": 0.9995,
+      "val_F1Score": 0.9561,
+      "val_Precision": 0.9662,
+      "val_Recall": 0.9521,
+      "val_accuracy": 0.9563,
+      "val_loss": 0.1172
     }
   ],
   "result": {
-    "version": "20261125-090247",
-    "model": "freshness-ai-20261125-090247.keras",
-    "n_uploads": 4,
-    "epochs": 2,
+    "version": "20261126-093735",
+    "model": "freshness-ai-20261126-093735.keras",
+    "n_uploads": 7,
+    "epochs": 1,
     "history": {
-      "AUC": [0.9993281412124634, 0.9995924234390259],
-      "F1Score": [0.9887065291404724, 0.9915932416915894],
-      "Precision": [0.9903660416603088, 0.9927884340286255],
-      "Recall": [0.9865642786026001, 0.990882933139801],
-      "accuracy": [0.9884837865829468, 0.9918426275253296],
-      "loss": [0.0391842611134052, 0.0297015104442835],
-      "val_AUC": [0.9984114170074463, 0.9986958503723145],
-      "val_F1Score": [0.9644613862037659, 0.9666372537612915],
-      "val_Precision": [0.9705263376235962, 0.9727272987365723],
-      "val_Recall": [0.9604166746139526, 0.9645833373069763],
-      "val_accuracy": [0.9645833373069763, 0.9666666388511658],
-      "val_loss": [0.1068274229764938, 0.1031570136547089]
+      "AUC": [0.9997206330299377],
+      "F1Score": [0.9875513911247253],
+      "Precision": [0.9903753399848938],
+      "Recall": [0.986104428768158],
+      "accuracy": [0.987541913986206],
+      "loss": [0.05181005597114563],
+      "val_AUC": [0.9994944930076599],
+      "val_F1Score": [0.9561055898666382],
+      "val_Precision": [0.9661733508110046],
+      "val_Recall": [0.9520833492279053],
+      "val_accuracy": [0.956250011920929],
+      "val_loss": [0.11716623604297638]
     },
     "before": {
       "accuracy": 0.9859375,
@@ -299,36 +402,31 @@ Documents are shown in MongoDB Extended JSON, as in the Atlas Data Explorer (`$o
       }
     },
     "after": {
-      "accuracy": 0.9875,
-      "precision": 0.987723074689538,
-      "recall": 0.9875,
-      "f1": 0.9873729035355532,
-      "auc_score": 0.9996875,
+      "accuracy": 0.978125,
+      "precision": 0.9788059988437541,
+      "recall": 0.978125,
+      "f1": 0.9780210180854689,
+      "auc_score": 0.9996328125,
       "confusion": [
-        [40, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [39, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 40, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 40, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 40, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 40, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 40, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 40, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 39, 0, 0, 0, 0, 0, 0, 0, 1, 0],
         [0, 0, 0, 0, 0, 0, 0, 40, 0, 0, 0, 0, 0, 0, 0, 0],
-        [1, 0, 0, 0, 0, 0, 0, 0, 36, 0, 0, 2, 1, 0, 0, 0],
+        [1, 0, 0, 0, 0, 0, 1, 0, 35, 0, 0, 2, 1, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 40, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40, 0, 0, 0, 0, 0],
         [0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 38, 0, 0, 1, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40, 0, 0, 0],
+        [0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 38, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40, 0, 0],
-        [0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 38, 0],
+        [0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 37, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40]
       ],
       "report": {
-        "fresh_apple": {
-          "precision": 0.975609756097561,
-          "recall": 1.0,
-          "f1-score": 0.9876543209876543,
-          "support": 40.0
-        },
+        "fresh_apple": {"precision": 0.975, "recall": 0.975, "f1-score": 0.975, "support": 40.0},
         "fresh_banana": {"precision": 1.0, "recall": 1.0, "f1-score": 1.0, "support": 40.0},
         "fresh_grape": {"precision": 1.0, "recall": 1.0, "f1-score": 1.0, "support": 40.0},
         "fresh_guava": {
@@ -337,44 +435,49 @@ Documents are shown in MongoDB Extended JSON, as in the Atlas Data Explorer (`$o
           "f1-score": 0.9876543209876543,
           "support": 40.0
         },
-        "fresh_jujube": {"precision": 1.0, "recall": 1.0, "f1-score": 1.0, "support": 40.0},
+        "fresh_jujube": {
+          "precision": 0.9302325581395349,
+          "recall": 1.0,
+          "f1-score": 0.963855421686747,
+          "support": 40.0
+        },
         "fresh_orange": {"precision": 1.0, "recall": 1.0, "f1-score": 1.0, "support": 40.0},
         "fresh_pomegranate": {
-          "precision": 0.9523809523809523,
-          "recall": 1.0,
-          "f1-score": 0.975609756097561,
+          "precision": 0.9069767441860465,
+          "recall": 0.975,
+          "f1-score": 0.9397590361445783,
           "support": 40.0
         },
         "fresh_strawberry": {"precision": 1.0, "recall": 1.0, "f1-score": 1.0, "support": 40.0},
-        "rotten_apple": {"precision": 1.0, "recall": 0.9, "f1-score": 0.9473684210526315, "support": 40.0},
+        "rotten_apple": {"precision": 1.0, "recall": 0.875, "f1-score": 0.9333333333333333, "support": 40.0},
         "rotten_banana": {"precision": 1.0, "recall": 1.0, "f1-score": 1.0, "support": 40.0},
         "rotten_grape": {"precision": 1.0, "recall": 1.0, "f1-score": 1.0, "support": 40.0},
         "rotten_guava": {"precision": 0.95, "recall": 0.95, "f1-score": 0.95, "support": 40.0},
         "rotten_jujube": {
-          "precision": 0.975609756097561,
-          "recall": 1.0,
-          "f1-score": 0.9876543209876543,
-          "support": 40.0
-        },
-        "rotten_orange": {"precision": 1.0, "recall": 1.0, "f1-score": 1.0, "support": 40.0},
-        "rotten_pomegranate": {
           "precision": 0.9743589743589743,
           "recall": 0.95,
           "f1-score": 0.9620253164556962,
           "support": 40.0
         },
+        "rotten_orange": {"precision": 1.0, "recall": 1.0, "f1-score": 1.0, "support": 40.0},
+        "rotten_pomegranate": {
+          "precision": 0.9487179487179487,
+          "recall": 0.925,
+          "f1-score": 0.9367088607594937,
+          "support": 40.0
+        },
         "rotten_strawberry": {"precision": 1.0, "recall": 1.0, "f1-score": 1.0, "support": 40.0},
-        "accuracy": 0.9875,
+        "accuracy": 0.978125,
         "macro avg": {
-          "precision": 0.987723074689538,
-          "recall": 0.9875,
-          "f1-score": 0.9873729035355532,
+          "precision": 0.9788059988437541,
+          "recall": 0.978125,
+          "f1-score": 0.9780210180854689,
           "support": 640.0
         },
         "weighted avg": {
-          "precision": 0.9877230746895382,
-          "recall": 0.9875,
-          "f1-score": 0.9873729035355533,
+          "precision": 0.9788059988437541,
+          "recall": 0.978125,
+          "f1-score": 0.9780210180854688,
           "support": 640.0
         }
       }
@@ -383,19 +486,19 @@ Documents are shown in MongoDB Extended JSON, as in the Atlas Data Explorer (`$o
   },
   "error": null,
   "base_model": "freshness-ai.keras",
-  "epoch": 2,
-  "batch": 66,
-  "batches_per_epoch": 66,
-  "current_metrics": {
-    "loss": 0.0301,
-    "accuracy": 0.9916,
-    "Precision": 0.9926,
-    "Recall": 0.9906,
-    "F1Score": 0.9914,
-    "AUC": 0.9996
-  },
   "evaluated_batches": 20,
   "evaluation_batches": 20,
+  "batch": 66,
+  "batches_per_epoch": 66,
+  "epoch": 1,
+  "current_metrics": {
+    "AUC": 0.9997,
+    "F1Score": 0.9876,
+    "Precision": 0.9904,
+    "Recall": 0.9861,
+    "accuracy": 0.9875,
+    "loss": 0.0518
+  },
   "performance_error": null
 }
 ```
@@ -492,80 +595,90 @@ Documents are shown in MongoDB Extended JSON, as in the Atlas Data Explorer (`$o
 </details>
 
 <details>
-<summary>Show a retrained model</summary>
+<summary>Show the retrained model (real document)</summary>
 
 ```json
 {
-  "_id": "freshness-ai-20261125-090247.keras",
-  "created_at": {"$date": "2026-11-25T09:02:47.493Z"},
-  "evaluated_at": {"$date": "2026-11-25T09:02:47.493Z"},
+  "_id": "freshness-ai-20261126-093735.keras",
+  "created_at": {"$date": "2026-11-26T09:37:36.268Z"},
+  "evaluated_at": {"$date": "2026-11-26T09:37:36.268Z"},
   "source": "retraining",
   "parent_model": "freshness-ai.keras",
-  "retraining_run_id": {"$oid": "6b069f2689bd317595b12f35"},
+  "retraining_run_id": {"$oid": "6b07fd775ec92ecd937d6c56"},
   "image_size": [224, 224],
   "training": {
-    "epochs": 2,
+    "epochs": 1,
     "learning_rate": 0.0001,
-    "uploaded_images": 4,
-    "final_validation": {"loss": 0.1031570136547089, "accuracy": 0.9666666388511658},
-    "best_epoch": 2,
+    "uploaded_images": 7,
+    "final_validation": {"loss": 0.11716623604297638, "accuracy": 0.956250011920929},
+    "best_epoch": 1,
     "history": {
-      "AUC": [0.9993, 0.9996],
-      "F1Score": [0.9887, 0.9916],
-      "Precision": [0.9904, 0.9928],
-      "Recall": [0.9866, 0.9909],
-      "accuracy": [0.9885, 0.9918],
-      "loss": [0.0392, 0.0297],
-      "val_AUC": [0.9984, 0.9987],
-      "val_F1Score": [0.9645, 0.9666],
-      "val_Precision": [0.9705, 0.9727],
-      "val_Recall": [0.9604, 0.9646],
-      "val_accuracy": [0.9646, 0.9667],
-      "val_loss": [0.1068, 0.1032]
+      "AUC": [0.9997],
+      "F1Score": [0.9876],
+      "Precision": [0.9904],
+      "Recall": [0.9861],
+      "accuracy": [0.9875],
+      "loss": [0.0518],
+      "val_AUC": [0.9995],
+      "val_F1Score": [0.9561],
+      "val_Precision": [0.9662],
+      "val_Recall": [0.9521],
+      "val_accuracy": [0.9563],
+      "val_loss": [0.1172]
     }
   },
   "test_evaluation": {
     "test_images": 640,
-    "accuracy": 0.9875,
-    "precision": 0.987723074689538,
-    "recall": 0.9875,
-    "f1": 0.9873729035355532,
-    "auc_score": 0.9996875,
-    "errors": 8,
+    "accuracy": 0.978125,
+    "precision": 0.9788059988437541,
+    "recall": 0.978125,
+    "f1": 0.9780210180854689,
+    "auc_score": 0.9996328125,
+    "errors": 14,
     "per_class": {
-      "fresh_apple": {"precision": 0.975609756097561, "recall": 1.0, "f1": 0.9876543209876543, "support": 40},
+      "fresh_apple": {"precision": 0.975, "recall": 0.975, "f1": 0.975, "support": 40},
       "fresh_banana": {"precision": 1.0, "recall": 1.0, "f1": 1.0, "support": 40},
       "fresh_grape": {"precision": 1.0, "recall": 1.0, "f1": 1.0, "support": 40},
       "fresh_guava": {"precision": 0.975609756097561, "recall": 1.0, "f1": 0.9876543209876543, "support": 40},
-      "fresh_jujube": {"precision": 1.0, "recall": 1.0, "f1": 1.0, "support": 40},
+      "fresh_jujube": {"precision": 0.9302325581395349, "recall": 1.0, "f1": 0.963855421686747, "support": 40},
       "fresh_orange": {"precision": 1.0, "recall": 1.0, "f1": 1.0, "support": 40},
-      "fresh_pomegranate": {"precision": 0.9523809523809523, "recall": 1.0, "f1": 0.975609756097561, "support": 40},
+      "fresh_pomegranate": {
+        "precision": 0.9069767441860465,
+        "recall": 0.975,
+        "f1": 0.9397590361445783,
+        "support": 40
+      },
       "fresh_strawberry": {"precision": 1.0, "recall": 1.0, "f1": 1.0, "support": 40},
-      "rotten_apple": {"precision": 1.0, "recall": 0.9, "f1": 0.9473684210526315, "support": 40},
+      "rotten_apple": {"precision": 1.0, "recall": 0.875, "f1": 0.9333333333333333, "support": 40},
       "rotten_banana": {"precision": 1.0, "recall": 1.0, "f1": 1.0, "support": 40},
       "rotten_grape": {"precision": 1.0, "recall": 1.0, "f1": 1.0, "support": 40},
       "rotten_guava": {"precision": 0.95, "recall": 0.95, "f1": 0.95, "support": 40},
-      "rotten_jujube": {"precision": 0.975609756097561, "recall": 1.0, "f1": 0.9876543209876543, "support": 40},
+      "rotten_jujube": {"precision": 0.9743589743589743, "recall": 0.95, "f1": 0.9620253164556962, "support": 40},
       "rotten_orange": {"precision": 1.0, "recall": 1.0, "f1": 1.0, "support": 40},
-      "rotten_pomegranate": {"precision": 0.9743589743589743, "recall": 0.95, "f1": 0.9620253164556962, "support": 40},
+      "rotten_pomegranate": {
+        "precision": 0.9487179487179487,
+        "recall": 0.925,
+        "f1": 0.9367088607594937,
+        "support": 40
+      },
       "rotten_strawberry": {"precision": 1.0, "recall": 1.0, "f1": 1.0, "support": 40}
     },
     "confusion_matrix": [
-      [40, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [39, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       [0, 40, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 40, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 40, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 40, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 40, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 40, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 39, 0, 0, 0, 0, 0, 0, 0, 1, 0],
       [0, 0, 0, 0, 0, 0, 0, 40, 0, 0, 0, 0, 0, 0, 0, 0],
-      [1, 0, 0, 0, 0, 0, 0, 0, 36, 0, 0, 2, 1, 0, 0, 0],
+      [1, 0, 0, 0, 0, 0, 1, 0, 35, 0, 0, 2, 1, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 40, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40, 0, 0, 0, 0, 0],
       [0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 38, 0, 0, 1, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40, 0, 0, 0],
+      [0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 38, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40, 0, 0],
-      [0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 38, 0],
+      [0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 37, 0],
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40]
     ]
   }

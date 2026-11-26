@@ -752,6 +752,19 @@ On a server with Docker, after steps 1 and 2:
 
 Without `APP_DOMAIN` and `API_DOMAIN`, the defaults are `freshness.bodemurairi.me` and `api.freshness.bodemurairi.me`. Caddy gets the HTTPS certificates automatically. Check the containers with `docker compose ps`.
 
+### 6. Rerun the notebook (optional)
+
+The train/validation/test split used by the model is already in `data/train`, `data/validation` and `data/test`. The original full-size images (`data/raw_data/`, about 2.9 GB) are not included, but the first cells of the notebook read them to explore the dataset and build the split. Download them again with:
+
+```bash
+source venv/bin/activate              # the environment from step 3
+python scripts/download_dataset.py
+```
+
+The script downloads the public [Fresh/Rotten Fruit dataset](https://huggingface.co/datasets/Project-AgML/fresh_rotten_fruit_classification) from Hugging Face (no account needed) and saves the 3,200 images in `data/raw_data/images/<class>/`. If it stops (network drop, laptop sleep), run it again: it continues where it stopped.
+
+Then open [notebook/freshness_ai.ipynb](notebook/freshness_ai.ipynb) with the `venv` kernel and run all cells. The split uses a fixed seed (42), so it matches the folders already in `data/`.
+
 ## Results from the flood request simulation
 
 The flood test uses [Locust](https://locust.io) ([locust/locustfile.py](locust/locustfile.py)). Each simulated user waits 1–3 seconds between requests. Out of every 15 requests, 10 are predictions, 1 is a Grad-CAM prediction, 2 open the models page and 2 open the insights page. The photos come from the test set.

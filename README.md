@@ -13,6 +13,7 @@ YouTube: **[Watch the demo](https://youtu.be/AhtC3tD3Sls)**
 | Web app | https://freshness.bodemurairi.me |
 | API | https://api.freshness.bodemurairi.me |
 | Documentation | https://api.freshness.bodemurairi.me/docs |
+| Run the notebook | [Running the notebook](#running-the-notebook) |
 
 ## Project description
 
@@ -754,16 +755,36 @@ Without `APP_DOMAIN` and `API_DOMAIN`, the defaults are `freshness.bodemurairi.m
 
 ### 6. Rerun the notebook (optional)
 
-The train/validation/test split used by the model is already in `data/train`, `data/validation` and `data/test`. The original full-size images (`data/raw_data/`, about 2.9 GB) are not included, but the first cells of the notebook read them to explore the dataset and build the split. Download them again with:
+See [Running the notebook](#running-the-notebook).
 
-```bash
-source venv/bin/activate              # the environment from step 3
-python scripts/download_dataset.py
-```
+## Running the notebook
 
-The script downloads the public [Fresh/Rotten Fruit dataset](https://huggingface.co/datasets/Project-AgML/fresh_rotten_fruit_classification) from Hugging Face (no account needed) and saves the 3,200 images in `data/raw_data/images/<class>/`. If it stops (network drop, laptop sleep), run it again: it continues where it stopped.
+The notebook [notebook/freshness_ai.ipynb](notebook/freshness_ai.ipynb) explores the dataset, splits it, trains the model and evaluates it. The train/validation/test split is already in `data/train`, `data/validation` and `data/test`, but the original full-size images (`data/raw_data/`, about 2.9 GB) are not included. The first cells of the notebook need them, so download them before running it.
 
-Then open [notebook/freshness_ai.ipynb](notebook/freshness_ai.ipynb) with the `venv` kernel and run all cells. The split uses a fixed seed (42), so it matches the folders already in `data/`.
+1. Create the Python environment (skip if you already did step 3 of the setup):
+
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate
+   pip install -r requirements.txt
+   ```
+
+2. Download the dataset:
+
+   ```bash
+   python scripts/download_dataset.py
+   ```
+
+   This downloads the public [Fresh/Rotten Fruit dataset](https://huggingface.co/datasets/Project-AgML/fresh_rotten_fruit_classification) from Hugging Face (no account needed) and saves the 3,200 images in `data/raw_data/images/<class>/`. If it stops (network drop, laptop sleep), run it again: it continues where it stopped.
+
+3. Open `notebook/freshness_ai.ipynb` in VS Code or Jupyter, choose the `venv` kernel, and run all cells. With Jupyter:
+
+   ```bash
+   pip install notebook
+   jupyter notebook notebook/freshness_ai.ipynb
+   ```
+
+The split uses a fixed seed (42), so it gives the same images as the folders already in `data/`.
 
 ## Results from the flood request simulation
 
